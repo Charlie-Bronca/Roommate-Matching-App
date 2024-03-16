@@ -36,6 +36,16 @@ app.get("/", function(req, res) {
     res.render("index", {'title':'My index page', 'heading':'My heading', 'data':test_data});
 });
 
+
+app.get("/flat_buddies_test", function(req, res) {
+    var sql = 'select * from users';
+    db.query(sql).then(results => {
+    	    // Send the results rows to the all-students template
+    	    // The rows will be in a variable called data
+        res.render('flat_buddies_test', {data: results});
+    });
+});
+/*
 app.get("/all_students_pug", function(req, res) {
     var sql = 'select * from Students';
     db.query(sql).then(results => {
@@ -44,7 +54,8 @@ app.get("/all_students_pug", function(req, res) {
         res.render('all_students', {data: results});
     });
 });
-
+*/
+/*
 app.get("/single_student_pug/:id", function(req, res){
     let stID = req.params.id;
     let st_sql = "select s.name as student, ps.name as programme, ps.id as pcode\
@@ -67,27 +78,27 @@ app.get("/single_student_pug/:id", function(req, res){
             res.render("single_student", {'student': student, 'programme': programme, 'data': results});
         });
         
-        /*
-        res.render('single_student', {'student': results[0].student, 'programme': results[0].programme})
         
-        output = '';
-        output = output + '<div><b>Student: </b>' + results[0].student +'</div>';
-        output = output + '<div><b>Programme: </b>' + results[0].programme+'</div>';;
+        //res.render('single_student', {'student': results[0].student, 'programme': results[0].programme})
         
-        db.query(mod_sql,[pCode]).then(results => {
-            output = output + '<br><table border="1px">';
-            console.log(results);
-            for (var row of results){
-                output = output + "<tr>"
-                output = output + '<td>' + row.module + '</td>'
-                output = output + '<td>'+row.name+'</td>'
-                output = output + "</tr>"
-            }
-            output = output + "</table>";
-            res.send(output);
+        //output = '';
+        //output = output + '<div><b>Student: </b>' + results[0].student +'</div>';
+        //output = output + '<div><b>Programme: </b>' + results[0].programme+'</div>';;
+        
+        //db.query(mod_sql,[pCode]).then(results => {
+            //output = output + '<br><table border="1px">';
+            //console.log(results);
+            //for (var row of results){
+                //output = output + "<tr>"
+                //output = output + '<td>' + row.module + '</td>'
+                //output = output + '<td>'+row.name+'</td>'
+                //output = output + "</tr>"
+            //}
+            //output = output + "</table>";
+            //res.send(output);
 
-        });
-        */
+        //});
+        
     });
 });
 
@@ -193,28 +204,28 @@ app.get("/single_pro/:id", function(req, res){
 
 
 });
-
-
+*/
+/*
 // Create a route for testing the db
 app.get("/db_test", function(req, res) {
     // Assumes a table called test_table exists in your database
     sql = 'select * from test_table';
     db.query(sql).then(results => {
         console.log(results);
-        {/*console.log(typeof results)*/} 
+        //console.log(typeof results)
         let string = ""
         for (let i = 0; i < results.length; i++) {
             string = string + "ID: " + results[i]["id"] + " Name: " + results[i]["name"] + "<br>"
           }
 
-        {/*
-        let string = ""
-        for(var row of results){
-            string = string + "ID: " + row.id + " Name: " + row.name + "<br>"
-        }
-        */}
-        console.log(string)
-        res.send(string)
+        //
+        //let string = ""
+        //for(var row of results){
+            //string = string + "ID: " + row.id + " Name: " + row.name + "<br>"
+        //}
+        //
+        //console.log(string)
+        //res.send(string)
     });
 });
 
@@ -234,6 +245,8 @@ app.get("/hello/:name", function(req, res) {
     //  Retrieve the 'name' parameter and use it in a dynamically generated page
     res.send("Hello " + req.params.name);
 });
+
+*/
 
 // Start server on port 3000
 app.listen(3000,function(){
