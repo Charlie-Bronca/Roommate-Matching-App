@@ -45,6 +45,29 @@ app.get("/flat_buddies_test", function(req, res) {
         res.render('flat_buddies_test', {data: results});
     });
 });
+
+
+app.get("/homepage", function(req, res) {
+        res.render('homepage');
+});
+
+app.get("/questionnaire", function(req, res) {
+    res.render('questionnaire');
+});
+
+app.get("/user_profile", function(req, res) {
+    res.render('user_profile');
+});
+
+app.get("/profiles", function(req, res) {
+    res.render('profiles');
+});
+
+app.get("/chat", function(req, res) {
+    res.render('chat');
+});
+
+
 /*
 app.get("/all_students_pug", function(req, res) {
     var sql = 'select * from Students';
