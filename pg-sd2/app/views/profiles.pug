@@ -1,4 +1,106 @@
 html 
     head    
         title FlatBuddies Profiles
-    body 
+        //link(rel='stylesheet' href='profiles.css')
+        style(type='text/css').
+           .profile_card{
+                border: solid;
+                border-width: 1px;
+                border-radius: 20px;
+                width: 250px;
+                height: 350px;
+                margin: 20px 20px;
+                display: flex;
+                flex-direction: column;
+            }
+            .grid{
+                /*
+                display: grid;
+                grid-template-columns: auto auto auto;
+                text-align: center;
+                */
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+            body{
+                display: flex;
+                justify-content: center;
+            }
+            p{
+                margin: 0;
+            }
+            .img{
+                height: 60%;
+                width: 100%;
+            }
+            .words{
+                height: 40%;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+            .info{
+                width: 100%;
+                height: 50%;
+                display: flex;
+                justify-content: space-around;
+                flex-direction: row;
+                align-items: center;
+            }
+            .read_more_div{
+                height:50%;
+                width:100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+            }
+            .read_more{
+                width:75%;
+                height:75%;
+                border-radius: 20px;
+            }
+            .p_div{
+                border: solid;
+                border-width: 1px;
+                border-radius: 20px;
+                padding:10px 10px;
+                width:35%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+    
+    
+            
+
+    body
+        div.grid
+            for item in data 
+                
+                div.profile_card
+
+                    div(style="height: 60%; width: 100%; background-image: url('Alice.png'); border-radius: 20px 20px 0px 0px;")
+
+                    div.words
+                        div.info
+                            div.p_div
+                                p #{item.first_name}
+                            div.p_div
+                                - var today = new Date();
+                                - var birthDate = new Date(item.dob);
+                                - var age = today.getFullYear() - birthDate.getFullYear();
+                                - var m = today.getMonth() - birthDate.getMonth();
+                                - if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {age--;}
+                                p #{age}
+                        
+                        div.read_more_div
+                            button.read_more Read more.
+                    
+                //tr  
+                    td #{item.user_id}
+                    td #{item.first_name + item.last_name}
