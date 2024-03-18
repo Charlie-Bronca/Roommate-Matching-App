@@ -2,6 +2,7 @@ html
     head    
         title FlatBuddies Profiles
         //link(rel='stylesheet' href='profiles.css')
+        link(href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet')
         style(type='text/css').
            .profile_card{
                 border: solid;
@@ -27,6 +28,7 @@ html
             body{
                 display: flex;
                 justify-content: center;
+                font-family: "Inter";
             }
             p{
                 margin: 0;
@@ -42,6 +44,10 @@ html
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
+                font-size: 12pt;
+                background-color:#fb9c84;
+                border-radius:0px 0px 20px 20px;
+                font-weight:bold;
             }
             .info{
                 width: 100%;
@@ -50,6 +56,7 @@ html
                 justify-content: space-around;
                 flex-direction: row;
                 align-items: center;
+            
             }
             .read_more_div{
                 height:50%;
@@ -62,7 +69,17 @@ html
             .read_more{
                 width:75%;
                 height:75%;
+             
+            }
+            button{
+                font-size: 12pt;
+                font-family: "Inter";
+                background-color:white;
+                font-weight:bold;
+                border-width: 1px;
                 border-radius: 20px;
+                border-color: black;
+                border-style: solid;
             }
             .p_div{
                 border: solid;
@@ -73,6 +90,7 @@ html
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                background-color:white;
             }
     
     
@@ -83,8 +101,9 @@ html
             for item in data 
                 
                 div.profile_card
-
-                    div(style="height: 60%; width: 100%; background-image: url('Alice.png'); border-radius: 20px 20px 0px 0px;")
+                    - const pic_style = "height: 60%; width: 100%; background-image: url('/images/"+item.user_id+".png'); background-position: center; background-repeat: no-repeat; background-size: cover; border-radius: 20px 20px 0px 0px;"
+                    //div(style="height: 60%; width: 100%; background-image: url('/images/13436.png'); background-position: center; background-repeat: no-repeat; background-size: cover; border-radius: 20px 20px 0px 0px;")
+                    div(style=pic_style)
 
                     div.words
                         div.info
