@@ -60,7 +60,12 @@ app.get("/user_profile", function(req, res) {
 });
 
 app.get("/profiles", function(req, res) {
-    res.render('profiles');
+    var sql = 'select * from users';
+    db.query(sql).then(results => {
+    	    // Send the results rows to the all-students template
+    	    // The rows will be in a variable called data
+        res.render('profiles', {data: results});
+    });
 });
 
 app.get("/chat", function(req, res) {
