@@ -1,125 +1,126 @@
-html 
-    head    
-        title FlatBuddies Profiles
-        //link(rel='stylesheet' href='profiles.css')
-        link(href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet')
-        style(type='text/css').
-           .profile_card{
-                border: solid;
-                border-width: 1px;
-                border-radius: 20px;
-                width: 250px;
-                height: 350px;
-                margin: 20px 20px;
-                display: flex;
-                flex-direction: column;
-            }
-            .grid{
-                /*
-                display: grid;
-                grid-template-columns: auto auto auto;
-                text-align: center;
-                */
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: space-around;
-            }
-            body{
-                display: flex;
-                justify-content: center;
-                font-family: "Inter";
-            }
-            p{
-                margin: 0;
-            }
-            .img{
-                height: 60%;
-                width: 100%;
-            }
-            .words{
-                height: 40%;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                font-size: 12pt;
-                background-color:#fb9c84;
-                border-radius:0px 0px 20px 20px;
-                font-weight:bold;
-            }
-            .info{
-                width: 100%;
-                height: 50%;
-                display: flex;
-                justify-content: space-around;
-                flex-direction: row;
-                align-items: center;
+extends header
+block head 
+    title FlatBuddies Profiles
+    //link(rel='stylesheet' href='profiles.css')
+    link(href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet')
+    style(type='text/css').
+        .profile_card{
+            border: solid;
+            border-width: 1px;
+            border-radius: 20px;
+            width: 250px;
+            height: 350px;
+            margin: 20px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .grid{
+            /*
+            display: grid;
+            grid-template-columns: auto auto auto;
+            text-align: center;
+            */
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        body{
+            font-family: "Inter";
+            margin: 0px;
+        }
+        p{
+            margin: 0;
+        }
+        .img{
+            height: 60%;
+            width: 100%;
+        }
+        .words{
+            height: 40%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-size: 12pt;
+            background-color:#fb9c84;
+            border-radius:0px 0px 20px 20px;
+            font-weight:bold;
+        }
+        .info{
+            width: 100%;
+            height: 50%;
+            display: flex;
+            justify-content: space-around;
+            flex-direction: row;
+            align-items: center;
+        
+        }
+        .read_more_div{
+            height:50%;
+            width:100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .read_more{
+            width:75%;
+            height:75%;
+            background-color:white;
+            border-width: 1px;
+            border-radius: 20px;
+            border-color: black;
+            border-style: solid;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             
-            }
-            .read_more_div{
-                height:50%;
-                width:100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+        }
+        a{
+            color: black;
+            text-decoration: none;
+        }
+        .p_div{
+            border: solid;
+            border-width: 1px;
+            border-radius: 20px;
+            padding:10px 10px;
+            width:35%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color:white;
+        }
 
-            }
-            .read_more{
-                width:75%;
-                height:75%;
-             
-            }
-            button{
-                font-size: 12pt;
-                font-family: "Inter";
-                background-color:white;
-                font-weight:bold;
-                border-width: 1px;
-                border-radius: 20px;
-                border-color: black;
-                border-style: solid;
-            }
-            .p_div{
-                border: solid;
-                border-width: 1px;
-                border-radius: 20px;
-                padding:10px 10px;
-                width:35%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color:white;
-            }
-    
     
             
 
-    body
-        div.grid
-            for item in data 
-                
-                div.profile_card
-                    - const pic_style = "height: 60%; width: 100%; background-image: url('/images/"+item.user_id+".png'); background-position: center; background-repeat: no-repeat; background-size: cover; border-radius: 20px 20px 0px 0px;"
-                    //div(style="height: 60%; width: 100%; background-image: url('/images/13436.png'); background-position: center; background-repeat: no-repeat; background-size: cover; border-radius: 20px 20px 0px 0px;")
-                    div(style=pic_style)
+block content
+    div.grid
+        for item in data 
+            
+            div.profile_card
+                - const pic_style = "height: 60%; width: 100%; background-image: url('/images/"+item.user_id+".png'); background-position: center; background-repeat: no-repeat; background-size: cover; border-radius: 20px 20px 0px 0px;"
+                //div(style="height: 60%; width: 100%; background-image: url('/images/13436.png'); background-position: center; background-repeat: no-repeat; background-size: cover; border-radius: 20px 20px 0px 0px;")
+                div(style=pic_style)
 
-                    div.words
-                        div.info
-                            div.p_div
-                                p #{item.first_name}
-                            div.p_div
-                                - var today = new Date();
-                                - var birthDate = new Date(item.dob);
-                                - var age = today.getFullYear() - birthDate.getFullYear();
-                                - var m = today.getMonth() - birthDate.getMonth();
-                                - if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {age--;}
-                                p #{age}
-                        
-                        div.read_more_div
-                            button.read_more Read more.
+                div.words
+                    div.info
+                        div.p_div
+                            p #{item.first_name}
+                        div.p_div
+                            - var today = new Date();
+                            - var birthDate = new Date(item.dob);
+                            - var age = today.getFullYear() - birthDate.getFullYear();
+                            - var m = today.getMonth() - birthDate.getMonth();
+                            - if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {age--;}
+                            p #{age}
                     
-                //tr  
-                    td #{item.user_id}
-                    td #{item.first_name + item.last_name}
+                    div.read_more_div
+                        a(href="/user_profile/"+ item.user_id).read_more Read more.
+                
+            //tr  
+                td #{item.user_id}
+                td #{item.first_name + item.last_name}
