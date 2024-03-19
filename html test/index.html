@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlatBuddies</title>
-    <link rel="stylesheet" href="index.css">
     <style>
         body, html {
             margin: 0;
@@ -224,6 +223,79 @@
             color: white;
             font-size: 18px;
         }
+        footer {
+            color: #000000;
+            padding: 20px 0;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-around;
+            width: 70%; /* Adjust width as needed */
+            height: 30vh;
+            margin: 1px auto; /* Center the box horizontally */
+            padding: 15px;
+            border-bottom: 1px solid #000;
+        }
+
+        .footer-section {
+            flex: 1;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 5px;
+        }
+
+        .footer-section ul li a {
+            text-decoration: none; /* Remove underline */
+            color: inherit; /* Inherit color from parent (white) */
+        }
+
+        .footer-section ul li a:hover{
+            color: red;
+        }
+        
+        .footer-section img{
+            height: 50px; /* Adjust height as needed */
+            margin-top: 20%;
+            margin-left: 100px;
+        }
+
+        @media screen and (max-width: 368px) {
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-section {
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            .footer-section img {
+                margin: 10px auto;
+            }
+        }
+
+        .copyright {
+            height: 5vh;
+        }
+
+        .copyright p {
+            margin: 10px;
+            margin-left: 70%;
+            color: #999;
+        }
+
     </style>
 </head>
 <body>
@@ -308,5 +380,51 @@
             </div>
         </div>
     </div>
+    <footer>
+        <div class="footer-container">
+          <div class="footer-section">
+            <h3>About Us</h3>
+            <ul>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Our Mission</a></li>
+              <li><a href="#">Meet the Team</a></li>
+              <li><a href="#">Testimonial</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Resources</h3>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Tips for Flatmates</a></li>
+              <li><a href="#">Neighbourhood Guides</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Support</h3>
+            <ul>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Term of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Connect</h3>
+            <ul>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Partner with Us</a></li>
+              <li><a href="#">Subscribe to Our Newsletter</a></li>
+              <li><a href="#">Social Media Icons</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <img src="./images/FlatBuddies logo2.png" alt="no logo">
+          </div>
+        </div>   
+        <div class="copyright">
+          <p>&copy; 2024 FlatBuddies. All rights reserved.</p>
+        </div>
+    </footer>  
 </body>
 </html>
