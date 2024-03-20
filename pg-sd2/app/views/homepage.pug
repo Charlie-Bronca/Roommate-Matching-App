@@ -2,11 +2,11 @@ doctype html
 html(lang='en')
   head
     meta(charset='UTF-8')
-    |     
+    |    
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    |     
+    |    
     title FlatBuddies
-    |     
+    |    
     style.
       body, html {
       margin: 0;
@@ -19,14 +19,15 @@ html(lang='en')
       justify-content: space-between;
       align-items: center;
       width: auto;
-      height: 70px;
-      padding-left: 50px;
-      padding-right: 50px;
+      height: 7vw;
+      padding-left: 5vw;
+      padding-right: 5vw;
       border-bottom: solid 0.5px;
       }
       .Logo {
-      width: 150px;
-      height: 45px;
+      width: 18%;
+      height: auto;
+      margin-right: 68%;
       }
       .buttons {
       display: flex;
@@ -115,13 +116,17 @@ html(lang='en')
       position: relative;
       margin-top: 5%;
       width: 95%;
-      height: auto;
+      height: 100%;
       z-index: 0;
+      object-fit: cover;
       }
       .tricont {
-      height: 50%;
       width: auto;
       position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-start;
+      height: 100%;
       }
       .text {
       font-family: Arial, Helvetica, sans-serif;
@@ -160,20 +165,19 @@ html(lang='en')
       .boxes{
       margin: 3vw;
       border: solid;
-      border-width: 0.75px;
+      border-width: 1px;
       border-radius: 30px;
       border-color: black;
+      width: 20%;
       }
       footer {
       color: #000000;
-      padding: 20px 0;
       }
       .footer-container {
       display: flex;
       justify-content: space-around;
-      width: 70%;
-      height: 110px;
-      margin: 1px auto;
+      width: 75%;
+      margin-left: 9vw;
       padding: 15px;
       }
       .footer-section {
@@ -181,31 +185,30 @@ html(lang='en')
       }
       .footer-section h3 {
       font-family: sans-serif;
-      font-size: 17px;
-      margin-bottom: 10px;
+      font-size: 1.4vw;
       }
       .footer-section ul {
       list-style-type: none;
       padding: 0;
       }
       .footer-section ul li {
-      margin-bottom: 5px;
+      margin-bottom: 1vw;
       font-family: sans-serif;
       font-weight: 200;
-      font-size: 13px;
+      font-size: 1vw;
       }
       .footer-section ul li a {
       text-decoration: none;
       color: inherit;
       }
       .footer-section ul li a:hover{
-      color: rgb(199, 20, 20);
+      color: #FE6941;
       }
       .footer-section img{
-      width: 150px;
-      height: 45px;
+      width: 100%;
+      height: auto;
       margin-top: 30%;
-      margin-left: 100px;
+      margin-left: 15%;
       }
       @media screen and (max-width: 368px) {
       .footer-container {
@@ -221,128 +224,128 @@ html(lang='en')
       }
       }
       .copyright {
-      height: 80px;
-      border-top: 1px solid #000;
+      height: 8vw;
+      border-top: 0.1vw solid #000;
       }
       .copyright p {
-      margin-top: 30px;
-      margin-left: 70%;
+      margin-top: 3vw;
+      margin-left: 70vw;
       color: #999;
       font-family: sans-serif;
-      font-size: 13px;
+      font-size: 1vw;
       }
   body
     .NavBar
       img.Logo(src='/logo/FlatBuddies logo2.png', alt='Logo')
-      |         
+      |        
       .buttons
         a.loginbutton(href='/login') Log In
     |  
-    |     
+    |    
     .tophalf
       .content
         .lukecel
           .picturemask
             img.picture(src='/images/45324.png', alt="Luke's profile picture")
-          |                 
+          |                
           img.profile(src='/images/Luke-Example.png', alt="Luke's profile")
-        |             
+        |            
         .lukecel
           .picturemask
             img.picture(src='/images/23436.png', alt="Luke's profile picture", width='auto', height='100%')
-          |                 
+          |                
           img.profile(src='/images/Celine-Example.png', alt="Celine's profile")
-        |             
+        |            
         .slogcont
           p.slogan
             | Find Your Perfect Roomie!
-      |         
+      |        
       .tricont
         .text
           p
             | Finding the perfect flatmate just got easier. FlatBuddies is your go-to platform for connecting with like-minded individuals who share your lifestyle and preferences. Whether you&apos;re a student, a young professional, or simply looking for a fresh start in London, FlatBuddies has you covered.
-        |             
+        |            
         img.triangle(src='/images/triangle.png', alt='This is a shape similar to a triangle')
-    |     
+    |    
     p.usertxt User reviews
-    |     
+    |    
     p.saying What users are saying...
-    |     
+    |    
     .reviews
       img.boxes(src='/images/Blair.png', alt="Blair's review")
-      |         
+      |        
       img.boxes(src='/images/James.png', alt="James' review")
-      |         
+      |        
       img.boxes(src='/images/Blessing.png', alt="Blessing's review")
-    |     
+    |    
     footer
       .footer-container
         .footer-section
           h3 About Us
-          |               
+          |              
           ul
             li
               a(href='#') About
-            |                   
+            |                  
             li
               a(href='#') Our Mission
-            |                   
+            |                  
             li
               a(href='#') Meet the Team
-            |                   
+            |                  
             li
               a(href='#') Testimonial
-        |           
+        |          
         .footer-section
           h3 Resources
-          |               
+          |              
           ul
             li
               a(href='#') FAQ
-            |                   
+            |                  
             li
               a(href='#') Blog
-            |                   
+            |                  
             li
               a(href='#') Tips for Flatmates
-            |                   
+            |                  
             li
               a(href='#') Neighbourhood Guides
-        |           
+        |          
         .footer-section
           h3 Support
-          |               
+          |              
           ul
             li
               a(href='#') Contact Us
-            |                   
+            |                  
             li
               a(href='#') Help Center
-            |                   
+            |                  
             li
               a(href='#') Term of Service
-            |                   
+            |                  
             li
               a(href='#') Privacy Policy
-        |           
+        |          
         .footer-section
           h3 Connect
-          |               
+          |              
           ul
             li
               a(href='#') Careers
-            |                   
+            |                  
             li
               a(href='#') Partner with Us
-            |                   
+            |                  
             li
               a(href='#') Subscribe to Our Newsletter
-            |                   
+            |                  
             li
               a(href='#') Social Media Icons
-        |           
+        |          
         .footer-section
-          img(src='logo/FlatBuddies logo2.png', alt='no logo')
-    |   
+          img(src='/logo/FlatBuddies logo2.png', alt='no logo')
+    |  
     .copyright
       p &copy; 2024 FlatBuddies. All rights reserved.
