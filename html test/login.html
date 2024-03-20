@@ -4,8 +4,137 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log-In</title>
+    <style>
+       .box{
+            margin: 3vw;
+            width: 400px;
+            height: 550px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: solid;
+            border-width: 1px;
+            border-radius: 30px;
+            border-color: black;
+        } 
+        .container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .inlogo{
+            width: 40%;
+            height: auto;
+            margin-top: 15%;
+        }
+        .register{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5px;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-top: 10%;
+            font-size: 1vw;
+        }
+           
+        .continue1{
+            background-color:  rgb(90, 130, 232);
+            width: 40vw;
+            height: 2.5vw;
+            max-width: 270px;
+            margin-left: 65px;
+            margin-top: 20px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            margin-top: 2%;
+            border-radius: 15px;
+            border: solid;
+            border-width: 0.5px;
+            cursor: pointer; 
+            color: #000;
+        }
+        .click1{
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1vw;
+            color: white;
+        }
+        .continue2{
+            background-color:  white;
+            width: 40vw;
+            height: 2.5vw;
+            max-width: 270px;
+            margin-left: 65px;
+            margin-top: 20px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            margin-top: 2%;
+            border-radius: 15px;
+            border: solid;
+            border-width: 0.5px;
+            cursor: pointer; 
+            color: #000;
+        }
+        .click2{
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1vw;
+            color: black;
+        }
+        .toptext1{
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            margin-top: 2%;
+        }
+        .toptext2{
+            font-family: Arial, Helvetica, sans-serif;
+            margin-bottom: 30px;
+            padding-left: 40px;
+            padding-right: 40px;
+            padding-top: 40px;
+            padding-bottom: 20px;
+            font-size: 0.8vw;
+        }
+        .close{
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+            color: black;
+            position: relative;
+            top: 10px;
+            left: 170px;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="container">
+        <div class="box">
+            <a href="index.html" class="close">X</a>
+            <div>
+                <img src="FlatBuddies logo2.png" alt="FlatBuddies logo" class="inlogo">
+                <p class="toptext1">Get started</p>
+                <p class="toptext2">By tapping Log In, you agree to our Terms. Learn how we process your data in our Privacy Policy, and Cookie Policy.</p>
+                <div class="continue1">
+                    <a href="profiles.pug" class="click1">Continue with google</a>
+                </div>
+                <div class="continue2">
+                    <a href="profiles.pug" class="click2">Log in with Apple</a>
+                </div>
+                <div class="continue2">
+                    <a href="profiles.pug" class="click2">Log in with email</a>
+                </div>
+                <div class="register">
+                    <p>Don't have an account yet?</p>
+                    <a href="questionnaire.pug">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
