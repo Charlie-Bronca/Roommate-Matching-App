@@ -1,0 +1,286 @@
+.NavBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  width: auto;
+  height: 70px;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin: -10px; /* Set margin to 0 */
+  border: 1px solid;
+  border-bottom: 0.5px solid;
+}
+
+ .Logo {
+    width: 150px;
+    height: 45px;
+ }
+
+ .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    width: 200px;
+    color: #FE6941;
+ }
+
+body {
+  background-color: #F2E9E2;
+  font-family: sans-serif;
+}
+
+.Profile-Main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; 
+  max-width: 1075px; 
+  padding: 40px; 
+  margin: auto;
+}
+
+#Profile-Header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#Profile-Pic {
+    padding: 10px;
+    width: 200px;
+    height: 200px; 
+    border-radius: 100%;
+    overflow: hidden; 
+    margin-right: 20px;
+}
+
+#First-Look {
+  flex: 1;
+  box-sizing: border-box;
+  border: 1px solid #333;
+  border-radius: 15px;
+  padding: 20px;
+  background-color: rgba(254, 105, 65, 0.32);
+  margin-right: 20px;
+}
+
+#First-Look h1 {
+  margin: 0;
+  font-size: 48px;
+}
+
+#First-Look p {
+  margin-top: 10px;
+  font-size: 24px;
+}
+
+#Bio {
+  box-sizing: border-box;
+  border: 1px solid #333;
+  border-radius: 15px;
+  width: 100%; /* Take up 90% of the width */
+  margin: auto; /* Center the Bio container */
+  min-height: 150px;
+  padding: 20px;
+  background-color: white;
+}
+
+#Profile-Details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.box {
+  border: 1px solid #333;
+  border-radius: 20px;
+  padding: 5px;
+  margin: 5px;
+  flex-grow: 0;
+  width: 100%;
+  min-width: 100px;
+  max-width: 225px;
+  text-align: center;
+}
+
+footer {
+  color: #000000;
+  padding: 20px 0;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+  height: 110px;
+   margin: 1px auto;
+   padding: 15px;
+  
+}
+
+.footer-section {
+  flex: 1;
+}
+
+.footer-section h3 {
+  font-family: sans-serif;
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.footer-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 5px;
+  font-family: sans-serif;
+  font-weight: 200;
+  font-size: 13px;
+}
+
+.footer-section ul li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-section ul li a:hover{
+  Color: #FE6941;
+}
+
+.footer-section img{
+  width: 150px;
+  height: 45px;
+  margin-top: 30%;
+  margin-left: 100px;
+}
+
+.copyright {
+  display: flex;
+  height: 80px;
+  border-top: 1px solid #000;
+}
+
+.copyright p {
+  margin-top: 30px;
+  margin-left: 70%;
+  color: #999;
+  font-family: sans-serif;
+  font-size: 13px;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .buttons {
+    width: auto; /* Remove fixed width */
+  }
+  
+  #Profile-Header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #Profile-Pic {
+    margin-right: 0; /* Reset margin for smaller screens */
+    margin-bottom: 20px; /* Add margin to separate from ID on smaller screens */
+  }
+  
+  #First-Look {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px; /* Add some margin for separation */
+    margin-right: 0; /* Reset margin for smaller screens */
+  }
+  
+  #Profile-Pic {
+    margin-right: 0; /* Reset margin for smaller screens */
+    margin-bottom: 20px; /* Add margin to separate from ID on smaller screens */
+  }
+
+  #Bio {
+    width: 100%;
+    max-width: 600px; /* Limit the maximum width */
+    margin: auto; /* Center the Bio container */
+    min-height: 150px;
+    padding: 20px;
+    background-color: white;
+  }
+
+  .box {
+    width: calc(50% - 20px); /* Adjust box width for smaller screens */
+  }
+
+  .footer-container {
+    width: 90%; /* Adjust width for smaller screens */
+  }
+
+  .footer-section {
+    margin-top: 10px; /* Reduce margin for smaller screens */
+  }
+
+  .footer-section img {
+    margin-top: 10px; /* Reduce margin for smaller screens */
+  }
+
+  .copyright p {
+    margin-left: 50%; /* Adjust position for smaller screens */
+  }
+}
+
+
+@media screen and (max-width: 368px) {
+  .NavBar {
+    padding: 0 10px; /* Further reduce padding */
+  }
+
+  .Logo {
+    width: 120px; /* Decrease logo size */
+    height: 36px;
+  }
+
+  #First-Look {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 20px; /* Add some margin for separation */
+    margin-right: 0; /* Reset margin for smaller screens */
+  }
+
+  #Bio {
+    width: 100%;
+    max-width: 300px; /* Limit the maximum width */
+    margin: auto; /* Center the Bio container */
+    min-height: auto;
+    padding: 20px;
+    background-color: white;
+  }
+
+  .box {
+    width: calc(100% - 20px); /* Adjust box width for even smaller screens */
+  }
+  
+  .footer-container {
+    flex-direction: column; /* Change layout to column for smaller screens */
+    align-items: center; /* Center items */
+    height: auto; /* Remove fixed height */
+  }
+
+  .footer-section {
+    margin-top: 15px; /* Further reduce margin */
+  }
+
+  .footer-section img {
+    margin: 10px auto; /* Center image */
+  }
+
+  .copyright p {
+    margin-left: auto; /* Reset margin */
+    margin-right: auto; /* Center the copyright text */
+    text-align: center; /* Center text */
+  }
+}

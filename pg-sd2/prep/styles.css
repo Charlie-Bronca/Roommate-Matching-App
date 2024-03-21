@@ -1,0 +1,80 @@
+@font-face {
+    font-family: 'ProximaNova'; /* Name you want to give to your font */
+    src: url('Demo_Fonts\Fontspring-DEMO-proximanovaexcn-regular.otf') format('opentype'); /* Path to your font file */
+}
+
+.NavBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+ 
+ 
+    width: auto;
+    height: 70px;
+ 
+ 
+    padding-left: 50px;
+    padding-right: 50px;
+ 
+ 
+    border: solid;
+    border-bottom: solid 0.5px;
+ }
+ 
+ 
+ .Logo {
+    width: 150px;
+    height: 45px;
+ }
+ 
+ 
+ .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+ 
+ 
+    width: 200px;
+ 
+ 
+    color: #FE6941;
+ }
+ 
+
+body {
+    font-family: 'ProximaNova', Arial, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: normal;
+    letter-spacing: normal;
+    line-height: 1.15;
+    color: var(--dl-color-gray-black);
+    background-color: #F2E9E2;
+}
+
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Distributes items evenly */
+}
+
+.footer-column {
+    flex: 1;
+    padding: 10px 20px; /* Adjust padding as needed */
+    box-sizing: border-box; /* Include padding in total width */
+}
+
+@media (max-width: 768px) {
+    .footer-column {
+        flex-basis: 50%;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-column {
+        flex-basis: 100%;
+    }
+}
+
