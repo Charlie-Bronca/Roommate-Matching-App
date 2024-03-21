@@ -95,6 +95,9 @@ html(lang='en')
       }
       }
       /* ------------------------------ */
+      .choice {
+        padding-left: 8px;
+      }
       .profile{
       display: flex;
       flex-direction: column;
@@ -207,6 +210,35 @@ html(lang='en')
       justify-content: space-between;
       padding: 0 10%;
       }
+      .butn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      color: #FE6941;
+      margin-bottom: 30px;
+      }
+      .loginbutton{
+      background-color: #FE6941;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.5vw;
+      width: 10vw;
+      height: 2.2vw;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      border-radius: 15px;
+      border: solid;
+      border-width: 0.5px;
+      cursor: pointer;
+      text-decoration: none;
+      color: #000;
+      }
+      .loginbutton:hover{
+      background-color: #FE6941;
+      box-shadow: inset 0px 5px 5px -5px rgba(0,0,0,0.75);
+      text-decoration: none;
+      }
       .preferenceNPGS{
       display: flex;
       flex-wrap: wrap;
@@ -249,7 +281,6 @@ html(lang='en')
       /* ----------------- */
       .bio-container {
       margin: 20px;
-      margin-bottom: 10%;
       }
       .bio-heading {
       font-size: 1.2rem;
@@ -259,7 +290,10 @@ html(lang='en')
       .bio-textarea {
       width: 100%;
       height: 150px;
+      font-family: sans-serif;
+      padding: 15px;
       resize: vertical;
+      border-radius: 25px;
       }
       /* ------------------ */
       /* For larger screens */
@@ -333,7 +367,7 @@ html(lang='en')
   body
     nav
       .logo
-        img(src='pg-sd2\images\FlatBuddies logo2.png', alt='Logo')
+        img(src='/logo/FlatBuddies logo2.png', alt='Logo')
       |         
       ul.nav-icons
         li
@@ -421,69 +455,69 @@ html(lang='en')
           |                 
           div
             input#male(type='radio', name='gender', value='male')
-            label(for='male') Male
+            label.choice(for='male') Male
           |                 
           div
             input#female(type='radio', name='gender', value='female')
-            label(for='female') Female
+            label.choice(for='female') Female
           |                 
           div
             input#other(type='radio', name='gender', value='other')
-            label(for='other') Other
+            label.choice(for='other') Other
         |             
         .preference-group
           .label Politics:
           |                 
           div
             input#liberal(type='radio', name='politics', value='liberal')
-            label(for='liberal') Liberal
+            label.choice(for='liberal') Liberal
           |                 
           div
             input#conservative(type='radio', name='politics', value='conservative')
-            label(for='conservative') Conservative
+            label.choice(for='conservative') Conservative
           |                 
           div
             input#prefer_not_to_say_politics(type='radio', name='politics', value='prefer_not_to_say')
-            label(for='prefer_not_to_say_politics') Prefer not to say
+            label.choice(for='prefer_not_to_say_politics') Prefer not to say
         |             
         .preference-group
           .label Religion:
           |                 
           div
             input#protestant(type='radio', name='religion', value='protestant')
-            label(for='protestant') Protestant
+            label.choice(for='protestant') Protestant
           |                 
           div
             input#catholic(type='radio', name='religion', value='catholic')
-            label(for='catholic') Catholic
+            label.choice(for='catholic') Catholic
           |                 
           div
             input#muslim(type='radio', name='religion', value='muslim')
-            label(for='muslim') Muslim
+            label.choice(for='muslim') Muslim
           |                 
           div
             input#hindu(type='radio', name='religion', value='hindu')
-            label(for='hindu') Hindu
+            label.choice(for='hindu') Hindu
           |                 
           div
             input#sikh(type='radio', name='religion', value='sikh')
-            label(for='sikh') Sikh
+            label.choice(for='sikh') Sikh
           |                 
           div
             input#spiritual(type='radio', name='religion', value='spiritual')
-            label(for='spiritual') Spiritual but not religious
+            label.choice(for='spiritual') Spiritual but not religious
           |                 
           div
             input#other_religion(type='radio', name='religion', value='other')
-            label(for='other_religion') Other
+            label.choice(for='other_religion') Other
           |                 
           div
             input#none(type='radio', name='religion', value='none')
-            label(for='none') None
+            label.choice(for='none') None
           |                 
           div
             input#prefer_not_to_say_religion(type='radio', name='religion', value='prefer_not_to_say')
-            label(for='prefer_not_to_say_religion') Prefer not to say
+            label.choice(for='prefer_not_to_say_religion') Prefer not to say
       // ------------------------------
       // #2
       .preferenceNPGS
@@ -492,41 +526,41 @@ html(lang='en')
           |               
           div
             input#quite(type='radio', name='noise', value='quite')
-            label(for='quite') Quite
+            label.choice(for='quite') Quite
           |               
           div
             input(type='radio', id='no preference', name='noise', value='no preference')
-            label(for='no preference') No Preference
+            label.choice(for='no preference') No Preference
         |           
         .preference-group
           .label Pets Preference:
           |             
           div
             input#pets(type='radio', name='pets', value='pets')
-            label(for='pets') Pets
+            label.choice(for='pets') Pets
           |             
           div
             input#nopets(type='radio', name='pets', value='nopets')
-            label(for='conservative') No Pets
+            label.choice(for='conservative') No Pets
           |             
           div
             input#nopreference(type='radio', name='pets', value='nopreference')
-            label(for='nopreference') No Preference
+            label.choice(for='nopreference') No Preference
         |           
         .preference-group
           .label Gender Preference:
           |               
           div
             input#allmale(type='radio', name='gender preference', value='allmale')
-            label(for='allmale') All Male Flat
+            label.choice(for='allmale') All Male Flat
           |               
           div
             input#allfemale(type='radio', name='gender preference', value='allfemale')
-            label(for='allfemale') All Female Flat
+            label.choice(for='allfemale') All Female Flat
           |               
           div
             input(type='radio', id='no preference', name='gender preference', value='no preference')
-            label(for='no preference') No Preference
+            label.choice(for='no preference') No Preference
         |          
         |         
         .preference-group
@@ -534,15 +568,15 @@ html(lang='en')
           |           
           div
             input#smokingallow(type='radio', name='smoking', value='smoking')
-            label(for='smoking') Smoking Allowed
+            label.choice(for='smoking') Smoking Allowed
           |           
           div
             input#nosmoking(type='radio', name='smoking', value='nosmoking')
-            label(for='nosmoking') No Smoking
+            label.choice(for='nosmoking') No Smoking
           |           
           div
             input#nopreference(type='radio', name='smoking', value='nopreference')
-            label(for='nopreference') No Preference
+            label.choice(for='nopreference') No Preference
       // ---------------------------
       // #3
       .preferenceAAL
@@ -551,69 +585,69 @@ html(lang='en')
           |           
           div
             input#drinkingallow(type='radio', name='Alcohol', value='drinking')
-            label(for='drinking') Drinking Allowed
+            label.choice(for='drinking') Drinking Allowed
           |           
           div
             input#nodrinking(type='radio', name='Alcohol', value='nodrinking')
-            label(for='nodrinking') No Drinking
+            label.choice(for='nodrinking') No Drinking
           |           
           div
             input#nopreference(type='radio', name='Alcohol', value='nopreference')
-            label(for='nopreference') No Preference
+            label.choice(for='nopreference') No Preference
         |       
         .preference-group
           .label Age Preference:
           |         
           div
             input#teen(type='radio', name='age', value='teen')
-            label(for='teen') 18 - 24
+            label.choice(for='teen') 18 - 24
           |         
           div
             input#young(type='radio', name='age', value='young')
-            label(for='young') 25 - 34
+            label.choice(for='young') 25 - 34
           |         
           div
             input#mature(type='radio', name='age', value='mature')
-            label(for='mature') 35 - 44
+            label.choice(for='mature') 35 - 44
           |         
           div
             input#old(type='radio', name='age', value='old')
-            label(for='old') 45+
+            label.choice(for='old') 45+
           |         
           div
             input#nopreference(type='radio', name='age', value='nopreference')
-            label(for='nopreference') No Preference
+            label.choice(for='nopreference') No Preference
         |     
         .preference-group
           .label Location Preference:
           |       
           div
             input#north(type='radio', name='location', value='north')
-            label(for='north') North London
+            label.choice(for='north') North London
           |       
           div
             input#ne(type='radio', name='location', value='ne')
-            label(for='ne') North East London
+            label.choice(for='ne') North East London
           |       
           div
             input#se(type='radio', name='location', value='se')
-            label(for='se') South East London
+            label.choice(for='se') South East London
           |       
           div
             input#sw(type='radio', name='location', value='sw')
-            label(for='sw') South West London
+            labe.choice(for='sw') South West London
           |       
           div
             input#west(type='radio', name='location', value='west')
-            label(for='west') West London
+            label.choice(for='west') West London
           |       
           div
             input#central(type='radio', name='location', value='central')
-            label(for='central') Central London
+            label.choice(for='central') Central London
           |       
           div
             input#nopreference(type='radio', name='location', value='nopreference')
-            label(for='nopreference') No Preference
+            label.choice(for='nopreference') No Preference
       // ----------------------------
       // #4
       .general-query
@@ -622,37 +656,37 @@ html(lang='en')
           |             
           div
             input#grocery-yes(type='radio', name='grocery', value='grocery-yes')
-            label(for='grocery-yes') Yes
+            label.choice(for='grocery-yes') Yes
           |             
           div
             input#grocery-no(type='radio', name='grocery', value='grocery-no')
-            label(for='grocery-no') No 
+            label.choice(for='grocery-no') No 
           |             
           div
             input#grocery-nopreference(type='radio', name='grocery', value='nopreference')
-            label(for='grocery-nopreference') No Preference
+            label.choice(for='grocery-nopreference') No Preference
         // #5
         .general-preference-group
           .label Would you prefer to live with flatmates from the same country as you?
           |             
           div
             input#country-yes(type='radio', name='country', value='country-yes')
-            label(for='country-yes') Yes
+            label.choice(for='country-yes') Yes
           |             
           div
             input#country-nopreference(type='radio', name='country', value='nopreference')
-            label(for='country-nopreference') No Preference
+            label.choice(for='country-nopreference') No Preference
         // #6
         .general-preference-group
           .label Would you prefer to live with flatmates from the same country as you?
           |             
           div
             input#country-yes(type='radio', name='country', value='country-yes')
-            label(for='country-yes') Yes
+            label.choice(for='country-yes') Yes
           |             
           div
             input#country-nopreference(type='radio', name='country', value='nopreference')
-            label(for='country-nopreference') No Preference
+            label.choice(for='country-nopreference') No Preference
         // #7
         .general-preference-group
           .label
@@ -660,168 +694,102 @@ html(lang='en')
           |             
           div
             input#politics-yes(type='radio', name='politics', value='politics-yes')
-            label(for='country-yes') Yes
+            label.choice(for='country-yes') Yes
           |             
           div
             input#politics-nopreference(type='radio', name='politics', value='nopreference')
-            label(for='country-nopreference') No Preference
+            label.choice(for='country-nopreference') No Preference
         // #8
         .general-preference-group
           .label Would you prefer to live with people who practice the same religion as you?
           |             
           div
             input#religion-yes(type='radio', name='religion', value='religion-yes')
-            label(for='country-yes') Yes
+            label.choice(for='country-yes') Yes
           |             
           div
             input#religion-nopreference(type='radio', name='religion', value='nopreference')
-            label(for='country-nopreference') No Preference
+            label.choice(for='country-nopreference') No Preference
           // #9
           .general-preference-group
             .label What is your work/school schedule like?
             |             
             div
               input#standard(type='radio', name='standard', value='standard')
-              label(for='standard') Standard 9 am to 5 pm
+              label.choice(for='standard') Standard 9 am to 5 pm
             |             
             div
               input#flexible(type='radio', name='flexible', value='flexible')
-              label(for='flexible') Flexible
+              label.choice(for='flexible') Flexible
             |             
             div
               input#varies(type='radio', name='varies', value='varies')
-              label(for='varies') Schedule varies day-to-day
+              label.choice(for='varies') Schedule varies day-to-day
             |             
             div
               input#home(type='radio', name='home', value='home')
-              label(for='home') Work From Home
+              label.choice(for='home') Work From Home
             |             
             div
               input#part-time(type='radio', name='part', value='part')
-              label(for='part') Part-Time
+              label.choice(for='part') Part-Time
             |             
             div
               input#full-time(type='radio', name='full', value='full')
-              label(for='full') Full-Time
+              label.choice(for='full') Full-Time
             |             
             div
               input#work-nopreference(type='radio', name='work', value='nopreference')
-              label(for='country-nopreference') No Preference
+              label.choice(for='country-nopreference') No Preference
             // #10
             .general-preference-group
               .label How would you describe your cleaning and organising style?
               |             
               div
                 input#clean-1(type='radio', name='clean-1', value='clean-1')
-                label(for='clean-1') I am clean and organised
+                label.choice(for='clean-1') I am clean and organised
               |             
               div
                 input#clean-2(type='radio', name='clean-2', value='clean-2')
-                label(for='clean-2') I am clean and somewhat organised
+                label.choice(for='clean-2') I am clean and somewhat organised
               |             
               div
                 input#clean-3(type='radio', name='clean-3', value='clean-3')
-                label(for='clean-3') I am organised, but I would like to hire someone to do the cleaning
+                label.choice(for='clean-3') I am organised, but I would like to hire someone to do the cleaning
               |             
               div
                 input#clean-4(type='radio', name='clean-4', value='clean-4')
-                label(for='clean-4') I don&rsquo;t mind it being unorganised and I would like to hire a cleaner
+                label.choice(for='clean-4') I don&rsquo;t mind it being unorganised and I would like to hire a cleaner
               |             
               div
                 input#clean-5(type='radio', name='clean-5', value='clean-5')
-                label(for='guest-5') A messy space does not bother me
+                label.choice(for='guest-5') A messy space does not bother me
               // #11
               .general-preference-group
                 .label How do you feel about bringing guests to the flat?
                 |             
                 div
                   input#guest-1(type='radio', name='guest-1', value='guest-1')
-                  label(for='guest-1') We should be allowed to bring anyone at any time
+                  label.choice(for='guest-1') We should be allowed to bring anyone at any time
                 |             
                 div
                   input#guest-2(type='radio', name='guest-2', value='guest-2')
-                  label(for='guest-2') No guest should stay for longer than 3 nights a week unless we have discussed it
+                  label.choice(for='guest-2') No guest should stay for longer than 3 nights a week unless we have discussed it
                 |             
                 div
                   input#guest-3(type='radio', name='guest-3', value='guest-3')
-                  label(for='guest-3') We should only have people over during the weekends
+                  label.choice(for='guest-3') We should only have people over during the weekends
                 |             
                 div
                   input#guest-4(type='radio', name='guest-4', value='guest-4')
-                  label(for='guest-4') No guests at all unless we have discussed it
+                  label.choice(for='guest-4') No guests at all unless we have discussed it
               // ------------------------
               .bio-container
                 h2.bio-heading Bio
                 |         
                 textarea.bio-textarea(placeholder='Write something about yourself...')
+
+              .butn     
+                a.loginbutton(href='/profiles') Submit
             // ---------------------------
-            footer
-              .footer-container
-                .footer-section
-                  h3 About Us
-                  |             
-                  ul
-                    li
-                      a(href='#') About
-                    |                 
-                    li
-                      a(href='#') Our Mission
-                    |                 
-                    li
-                      a(href='#') Meet the Team
-                    |                 
-                    li
-                      a(href='#') Testimonial
-                |         
-                .footer-section
-                  h3 Resources
-                  |             
-                  ul
-                    li
-                      a(href='#') FAQ
-                    |                 
-                    li
-                      a(href='#') Blog
-                    |                 
-                    li
-                      a(href='#') Tips for Flatmates
-                    |                 
-                    li
-                      a(href='#') Neighbourhood Guides
-                |         
-                .footer-section
-                  h3 Support
-                  |             
-                  ul
-                    li
-                      a(href='#') Contact Us
-                    |                 
-                    li
-                      a(href='#') Help Center
-                    |                 
-                    li
-                      a(href='#') Term of Service
-                    |                 
-                    li
-                      a(href='#') Privacy Policy
-                |         
-                .footer-section
-                  h3 Connect
-                  |             
-                  ul
-                    li
-                      a(href='#') Careers
-                    |                 
-                    li
-                      a(href='#') Partner with Us
-                    |                 
-                    li
-                      a(href='#') Subscribe to Our Newsletter
-                    |                 
-                    li
-                      a(href='#') Social Media Icons
-                |         
-                .footer-section
-                  img(src='./images/FlatBuddies logo2.png', alt='no logo')
-            .copyright
-              p &copy; 2024 FlatBuddies. All rights reserved.
+            
