@@ -24,9 +24,9 @@ CREATE TABLE login(
 CREATE TABLE preferences(
 	user_id int(10) NOT NULL,
 	location varchar(50) NOT NULL,
-	age varchar(50) NOT NULL,
+	p_age varchar(50) NOT NULL,
 	noise varchar(50) NOT NULL,
-	gender varchar(50) NOT NULL,
+	p_gender varchar(50) NOT NULL,
 	cleanliness varchar(200) NOT NULL,
 	smoking varchar(50) NOT NULL,
 	alcohol varchar(50) NOT NULL,
@@ -34,9 +34,9 @@ CREATE TABLE preferences(
 	schedule varchar(50) NOT NULL,
 	pets varchar(50) NOT NULL,
 	guests varchar(200) NOT NULL,
-	religion varchar(50) NOT NULL,
-	politics varchar(50) NOT NULL,
-	country varchar(50) NOT NULL
+	p_religion varchar(50) NOT NULL,
+	p_politics varchar(50) NOT NULL,
+	p_country varchar(50) NOT NULL
 );
 	
 
