@@ -41,17 +41,23 @@ app.get("/questionnaire", function(req, res) {
     res.render('questionnaire');
 });
 
+
 app.get("/user_profile/56789", function(req, res) {
-    var sql = 'SELECT * FROM users JOIN preferences ON users.user_id = preferences.user_id WHERE users.user_id = 56789';
+    var sql = 'SELECT * FROM users JOIN preferences ON users.user_id = preferences.user_id WHERE users.user_id = 27476';
+    //var sql = 'select * from users where user_id = 56789';
+
     db.query(sql).then(results => {
         /*const dataWithAge = results.map(row => {
             const dob = row.dob; 
             const age = calculateAge(dob); 
             return { firstName: row.first_name, age };
         });*/
-        res.render('user_profile', { data: results });
+        console.log(results)
+        res.render('user_profile', {data: results});
     });
 });
+
+
 
 /*
 function calculateAge(dob) {
@@ -83,12 +89,14 @@ app.get("/login", function(req, res) {
     res.render('login');
 });
 
-app.get("/user_profile/:user_id", function(req, res){
+app.get("/user_profile/test/:user_id", function(req, res){
     let user_id = req.params.user_id;
     let one_user_sql = "select * from users where user_id = ?"
-    db.query(one_user_sql,[user_id]).then(results => {
+    var one_sql = 'SELECT * FROM users JOIN preferences ON users.user_id = preferences.user_id WHERE users.user_id = ?';
+
+    db.query(one_sql,[user_id]).then(results => {
         console.log(results)
-        res.send(results)
+        res.render('user_profile', {data: results});
         //res.render("single_student", {'data': results});
     })
 });

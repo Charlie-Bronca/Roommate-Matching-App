@@ -1,3 +1,4 @@
+
 doctype html
 html(lang='en')
   head
@@ -5,8 +6,12 @@ html(lang='en')
     |     
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     |     
-    title User Profile: 56789
+
+    title User Profile
     |     
+
+    
+
     style.
       .NavBar {
       display: flex;
@@ -55,6 +60,7 @@ html(lang='en')
       padding: 10px;
       width: 200px;
       height: 200px;
+      object-fit: cover;
       border-radius: 100%;
       overflow: hidden;
       margin-right: 20px;
@@ -272,37 +278,44 @@ html(lang='en')
     |     
     .Profile-Main
       #Profile-Header
-        img#Profile-Pic(src='http://127.0.0.1:5500/Roommate-Matching-App/pg-sd2/static/images/56789.png', alt='Profile Photo')
+
+        img#Profile-Pic(src="/images/"+data[0].user_id+".png", alt='Profile Photo')
         |             
         #First-Look
-          h1 name, age
+          - var today = new Date();
+          - var birthDate = new Date(data[0].dob);
+          - var age = today.getFullYear() - birthDate.getFullYear();
+          - var m = today.getMonth() - birthDate.getMonth();
+          - if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {age--;}
+
+          h1 #{data[0].first_name}, #{age}
           |                 
-          p Occupation
+          p #{data[0].job}
       |         
-      #Bio Bio written here
+      #Bio #{data[0].bio}
       |         
       #Profile-Details
-        .box(style='background-color: rgba(241, 20, 20, .2);') Country
+        .box(style='background-color: rgba(241, 20, 20, .2);') #{data[0].country}
         |             
-        .box(style='background-color: rgba(24, 85, 177, .2);') Politics
+        .box(style='background-color: rgba(24, 85, 177, .2);') #{data[0].politics}
         |             
-        .box(style='background-color: rgba(150, 106, 87, .2);') Religion
+        .box(style='background-color: rgba(150, 106, 87, .2);') #{data[0].religion}
         |             
-        .box(style='background-color: rgba(188, 213, 251, .2);') Noise
+        .box(style='background-color: rgba(188, 213, 251, .2);') #{data[0].noise}
         |             
-        .box(style='background-color: rgba(233, 237, 46, .2);') Pets
+        .box(style='background-color: rgba(233, 237, 46, .2);') #{data[0].pets}
         |             
-        .box(style='background-color: rgba(81, 122, 85, .2);') Groceries
+        .box(style='background-color: rgba(81, 122, 85, .2);') #{data[0].groceries}
         |             
-        .box(style='background-color: rgba(168, 62, 177, .2);') Schedule
+        .box(style='background-color: rgba(168, 62, 177, .2);') #{data[0].schedule}
         |             
-        .box(style='background-color: rgba(255, 198, 130, .2);') Cleanliness
+        .box(style='background-color: rgba(255, 198, 130, .2);') #{data[0].cleanliness}
         |             
-        .box(style='background-color: rgba(137, 247, 85, .2);') Organised
+        //.box(style='background-color: rgba(137, 247, 85, .2);') #{data[0].organized}
         |             
-        .box(style='background-color: rgba(209, 151, 0, .2);') Guests
+        .box(style='background-color: rgba(209, 151, 0, .2);') #{data[0].guests}
         |             
-        .box(style='background-color: rgba(221, 113, 230, .2);') One Gender Only
+        .box(style='background-color: rgba(221, 113, 230, .2);') #{data[0].gender}
     |  
     |     
     footer
