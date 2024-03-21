@@ -207,6 +207,35 @@ html(lang='en')
       justify-content: space-between;
       padding: 0 10%;
       }
+      .butn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      color: #FE6941;
+      margin-bottom: 30px;
+      }
+      .loginbutton{
+      background-color: #FE6941;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.5vw;
+      width: 10vw;
+      height: 2.2vw;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      border-radius: 15px;
+      border: solid;
+      border-width: 0.5px;
+      cursor: pointer;
+      text-decoration: none;
+      color: #000;
+      }
+      .loginbutton:hover{
+      background-color: #FE6941;
+      box-shadow: inset 0px 5px 5px -5px rgba(0,0,0,0.75);
+      text-decoration: none;
+      }
       .preferenceNPGS{
       display: flex;
       flex-wrap: wrap;
@@ -249,7 +278,6 @@ html(lang='en')
       /* ----------------- */
       .bio-container {
       margin: 20px;
-      margin-bottom: 10%;
       }
       .bio-heading {
       font-size: 1.2rem;
@@ -754,6 +782,9 @@ html(lang='en')
                 h2.bio-heading Bio
                 |         
                 textarea.bio-textarea(placeholder='Write something about yourself...')
+
+              .butn     
+                a.loginbutton(href='/profiles') Submit
             // ---------------------------
             footer
               .footer-container
