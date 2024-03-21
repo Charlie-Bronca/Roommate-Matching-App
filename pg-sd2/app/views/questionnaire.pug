@@ -4,41 +4,30 @@ block head
   |     
   meta(name='viewport', content='width=device-width, initial-scale=1.0')
   |     
-  link(rel='stylesheet', href='questionnaire.css')
-  |     
   title FlatBuddies
   |     
   style.
-    /* Reset default margin and padding */
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    }
-    /* Body styles */
-    body {
+    body{
     font-family: sans-serif;
-    background-color: rgba(242, 233, 226, 0.75); 
-    
-    }
+    background-color: rgba(242, 233, 226, 0.75); }
+
     @media screen and (max-width: 368px) {
-    body {
-    font-size: 14px;
-    background-color: #fff;
-    }
+      body {
+        font-size: 14px;
+        background-color: #F2E9E2;
+        }
     }
     
-    /* -------------- */
     .container {
-    width: 80%;
-    height: 415vh;
-    margin: 50px auto;
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 5%;
+      width: 80%;
+      height: 420vh;
+      margin: 50px auto;
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 5%;
     }
     .header h4 {
     margin-bottom: 10px;
@@ -239,7 +228,7 @@ block head
     .general-preference-group:last-child{
     margin-right: 0;
     }
-    /* ----------------- */
+
     .bio-container {
     margin: 20px;
     }
@@ -256,8 +245,8 @@ block head
     resize: vertical;
     border-radius: 25px;
     }
-    /* ------------------ */
-      
+    
+    
 block content
   .container
     .header
