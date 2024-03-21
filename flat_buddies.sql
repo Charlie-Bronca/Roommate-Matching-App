@@ -24,9 +24,9 @@ CREATE TABLE login(
 CREATE TABLE preferences(
 	user_id int(10) NOT NULL,
 	location varchar(50) NOT NULL,
-	age varchar(50) NOT NULL,
+	p_age varchar(50) NOT NULL,
 	noise varchar(50) NOT NULL,
-	gender varchar(50) NOT NULL,
+	p_gender varchar(50) NOT NULL,
 	cleanliness varchar(200) NOT NULL,
 	smoking varchar(50) NOT NULL,
 	alcohol varchar(50) NOT NULL,
@@ -34,9 +34,9 @@ CREATE TABLE preferences(
 	schedule varchar(50) NOT NULL,
 	pets varchar(50) NOT NULL,
 	guests varchar(200) NOT NULL,
-	religion varchar(50) NOT NULL,
-	politics varchar(50) NOT NULL,
-	country varchar(50) NOT NULL
+	p_religion varchar(50) NOT NULL,
+	p_politics varchar(50) NOT NULL,
+	p_country varchar(50) NOT NULL
 );
 	
 
@@ -144,7 +144,7 @@ INSERT INTO login (email, password, user_id) VALUES
 ("luketmartin@gmail.com", "Belgium4", 45324);
 
 
-INSERT INTO preferences (user_id, location, age, noise, gender, cleanliness, smoking, alcohol, groceries, schedule, pets, guests, religion, politics, country) VALUES
+INSERT INTO preferences (user_id, location, p_age, noise, p_gender, cleanliness, smoking, alcohol, groceries, schedule, pets, guests, p_religion, p_politics, p_country) VALUES
 (27476, "SE London", "25-34", "No Preference", "No Preference", "I am clean and somewhat organized", "No Preference", "No Preference", "No", "Flexible Schedule", "Pets", "We should only have people over during the weekends", "No Preference", "No Preference","No Preference"),
 (13436, "SW London", "18-24", "Quiet", "All Female Flat", "I am organised, but I would like to hire someone to do the cleaning","No Smoking", "No Preference", "Yes", "Part Time Student", "No Preference", "We should be allowed to bring anyone at any time", "Yes", "No Preference", "No Preference"),
 (34786, "N London", "18-24", "No Preference", "All Female Flat", "I don’t mind it being unorganised and I would like to hire a cleaner","Smoking Allowed", "No Drinking", "No", "Schedule varies day-to-day", "No Preference", "We should be allowed to bring anyone at any time", "No Preference", "No Preference", "No Preference"),

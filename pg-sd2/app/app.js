@@ -45,6 +45,7 @@ app.get("/questionnaire", function(req, res) {
 app.get("/user_profile/56789", function(req, res) {
     var sql = 'SELECT * FROM users JOIN preferences ON users.user_id = preferences.user_id WHERE users.user_id = 27476';
     //var sql = 'select * from users where user_id = 56789';
+
     db.query(sql).then(results => {
         /*const dataWithAge = results.map(row => {
             const dob = row.dob; 
@@ -55,6 +56,7 @@ app.get("/user_profile/56789", function(req, res) {
         res.render('user_profile', {data: results});
     });
 });
+
 
 
 /*
