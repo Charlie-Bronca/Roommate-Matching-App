@@ -86,6 +86,21 @@ app.get("/user_profile/:user_id", function(req, res){
     })
 });
 
+app.get("/homepage_test", function(req, res) {
+    res.render('homepage_test');
+});
+
+
+app.get("/chat_test", function(req, res) {
+    res.render('chat_test');
+});
+
+app.get("/reviews", function(req, res) {
+    res.render('reviews');
+});
+
+
+
 
 
 /*
