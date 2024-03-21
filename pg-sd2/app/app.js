@@ -72,6 +72,10 @@ app.get("/chat", function(req, res) {
     res.render('chat');
 });
 
+app.get("/login", function(req, res) {
+    res.render('login');
+});
+
 app.get("/user_profile/:user_id", function(req, res){
     let user_id = req.params.user_id;
     let one_user_sql = "select * from users where user_id = ?"
