@@ -70,14 +70,14 @@ app.get("/user_profile/:user_id", async function(req, res) {
 //Data for chat, added for Sprint4
 app.get("/chat", async function(req, res) {
     const chatData = {
-        chatId: 'chat1',
-        senderId: 'user1',
-        recipientId: 'user2',
+        chat_id: 'chat1',
+        sender_id: 'user1',
+        recipient_id: 'user2',
         timestamp: new Date(),
         message: 'Hello, Bob!'
     };
 
-    const chat = new Chat(chatData.chatId, chatData.senderId, chatData.recipientId, chatData.timestamp, chatData.message);
+    const chat = new Chat(chatData.chat_id, chatData.sender_id, chatData.recipient_id, chatData.timestamp, chatData.message);
 
     const senderName = await chat.getSenderName();
     const recipientName = await chat.getRecipientName();
