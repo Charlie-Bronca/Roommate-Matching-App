@@ -45,24 +45,22 @@ app.get("/questionnaire", function(req, res) {
 });
 
 
-app.get("/user_profile/:user_id", function(req, res) {
-    //var sql = 'SELECT * FROM users JOIN preferences ON users.user_id = preferences.user_id WHERE users.user_id = 27476';
-    //var sql = 'select * from users where user_id = 56789';
-
+app.get("/user_profile/:user_id", async function(req, res) {
     let user_id = req.params.user_id;
-
     let user = new User(user_id);
+    await user.getFirstName();
+    await user.getLastName();
+    await user.getDOB();
+    await user.getGender();
+    await user.getPolitics();
+    await user.getReligion();
+    await user.getCountry();
+    await user.getBio();
+    await user.getPreferences();
+    await user.getAge();
     console.log(user);
-    res.send("hello");
-    //var one_sql = 'SELECT * FROM users JOIN preferences ON users.user_id = preferences.user_id WHERE users.user_id = ?';
-    /*
-    db.query(one_sql,[user_id]).then(results => {
-        console.log(results)
-        res.render('user_profile', {data: results});
-        //res.render("single_student", {'data': results});
-    })
-    */
-
+    //res.send(user);
+    res.render('user_profile_oop', {user:user})
 
 });
 
