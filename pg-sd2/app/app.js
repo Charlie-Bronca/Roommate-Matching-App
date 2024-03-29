@@ -14,6 +14,9 @@ app.use(express.static("static"));
 // Get the functions in the db.js file to use
 const db = require('./services/db');
 
+//Get User Class
+const { User } = require("./models/user");
+
 // Create a route for root - /
 app.get("/", function(req, res) {
     // Set up an array of data
@@ -42,19 +45,25 @@ app.get("/questionnaire", function(req, res) {
 });
 
 
-app.get("/user_profile/56789", function(req, res) {
-    var sql = 'SELECT * FROM users JOIN preferences ON users.user_id = preferences.user_id WHERE users.user_id = 27476';
+app.get("/user_profile/:user_id", function(req, res) {
+    //var sql = 'SELECT * FROM users JOIN preferences ON users.user_id = preferences.user_id WHERE users.user_id = 27476';
     //var sql = 'select * from users where user_id = 56789';
 
-    db.query(sql).then(results => {
-        /*const dataWithAge = results.map(row => {
-            const dob = row.dob; 
-            const age = calculateAge(dob); 
-            return { firstName: row.first_name, age };
-        });*/
+    let user_id = req.params.user_id;
+
+    let user = new User(user_id);
+    console.log(user);
+    res.send("hello");
+    //var one_sql = 'SELECT * FROM users JOIN preferences ON users.user_id = preferences.user_id WHERE users.user_id = ?';
+    /*
+    db.query(one_sql,[user_id]).then(results => {
         console.log(results)
         res.render('user_profile', {data: results});
-    });
+        //res.render("single_student", {'data': results});
+    })
+    */
+
+
 });
 
 

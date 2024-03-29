@@ -1,6 +1,6 @@
 const db = require('../services/db');
 
-class Student{
+class User{
     user_id;
     first_name;
     last_name;
@@ -17,7 +17,11 @@ class Student{
     }
 
     async getFirstName(){
-
+        if (typeof this.first_name !== 'string') {
+            var sql = "SELECT * from users where user_id = ?"
+            const results = await db.query(sql, [this.user_id]);
+            this.first_name = results[0].first_name;
+        }
     }
 
     async getLastName(){
@@ -57,4 +61,8 @@ class Student{
     }
 
 
+}
+
+module.exports = {
+    User
 }
