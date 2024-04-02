@@ -17,6 +17,9 @@ const db = require('./services/db');
 //Get User Class
 const { User } = require("./models/user");
 
+//Get Chat Class
+const { Chat } = require("./models/chat");
+
 // Create a route for root - /
 app.get("/", function(req, res) {
     // Set up an array of data
@@ -64,6 +67,24 @@ app.get("/user_profile/:user_id", async function(req, res) {
 
 });
 
+//Data for chat, added for Sprint4
+app.get("/chat", async function(req, res) {
+    const chatData = {
+        chat_id: 'chat1',
+        sender_id: 'user1',
+        recipient_id: 'user2',
+        timestamp: new Date(),
+        message: 'Hello, Bob!'
+    };
+
+    const chat = new Chat(chatData.chat_id, chatData.sender_id, chatData.recipient_id, chatData.timestamp, chatData.message);
+
+    const senderName = await chat.getSenderName();
+    const recipientName = await chat.getRecipientName();
+
+    res.render('chat', { senderName, recipientName, chatData });
+});
+
 
 
 /*
@@ -91,6 +112,7 @@ app.get("/profiles", function(req, res) {
 app.get("/chat", function(req, res) {
     res.render('chat');
 });
+
 
 app.get("/login", function(req, res) {
     res.render('login');
