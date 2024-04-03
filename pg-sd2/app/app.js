@@ -14,7 +14,14 @@ app.use(express.static("static"));
 // Get the functions in the db.js file to use
 const db = require('./services/db');
 
-const { Review } = require('./reviews');
+//Get User Class
+const { User } = require("./models/user");
+
+//Get Chat Class
+const { Chat } = require("./models/chat");
+
+//Get Review Class
+const { Review } = require('.models/review');
 
 // Create a route for root - /
 app.get("/", function(req, res) {
