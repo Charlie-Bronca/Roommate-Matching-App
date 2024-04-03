@@ -1,0 +1,169 @@
+
+extends header
+block head
+  meta(charset='UTF-8')
+  |     
+  meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  |     
+  title User Profile
+
+  style.
+    body {
+    background-color: #F2E9E2;
+    font-family: sans-serif;
+    }
+    .Profile-Main {/*css container of the main portion of the profiles page */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1075px;
+    padding: 40px;
+    margin: auto;
+    }
+    #Profile-Header {/*css id for the Profile-Pic and First-Profile*/
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    }
+    #Profile-Pic {/*Profile Pic id*/
+    padding: 10px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-right: 20px;
+    }
+    #First-Look {/*Large Box with name, age, and occupation*/
+    flex: 1;
+    box-sizing: border-box;
+    border: 1px solid #333;
+    border-radius: 15px;
+    padding: 20px;
+    background-color: rgba(254, 105, 65, 0.32);
+    margin-right: 20px;
+    }
+    #First-Look h1 {
+    margin: 0;
+    font-size: 48px;
+    }
+    #First-Look p {
+    margin-top: 10px;
+    font-size: 24px;
+    }
+    #Bio {
+    box-sizing: border-box;
+    border: 1px solid #333;
+    border-radius: 15px;
+    width: 100%;
+    margin: auto; 
+    min-height: 150px;
+    padding: 20px;
+    background-color: white;
+    }
+    #Profile-Details {/*id for smaller boxes with other data*/
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    }
+    .box {/*CSS for the data box*/
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 5px;
+    margin: 5px;
+    flex-grow: 0;
+    width: 100%;
+    min-width: 100px;
+    max-width: 225px;
+    text-align: center;
+    }
+    @media only screen and (max-width: 600px) {/*For responsiveness for medium size screen*/
+    #Profile-Header {
+    flex-direction: column;
+    align-items: center;
+    }
+    #Profile-Pic {
+    margin-right: 0; 
+    margin-bottom: 20px; 
+    }
+    #First-Look {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px; 
+    margin-right: 0; 
+    }
+    #Profile-Pic {
+    margin-right: 0; 
+    margin-bottom: 20px; 
+    }
+    #Bio {
+    width: 100%;
+    max-width: 600px; 
+    margin: auto;
+    min-height: 150px;
+    padding: 20px;
+    background-color: white;
+    }
+    .box {
+    width: calc(50% - 20px);
+    }
+    }
+    @media screen and (max-width: 368px) {/*allows for responsiveness to small screens*/
+    #First-Look {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 20px;
+    margin-right: 0; 
+    }
+    #Bio {
+    width: 100%;
+    max-width: 300px;
+    margin: auto; 
+    min-height: auto;
+    padding: 20px;
+    background-color: white;
+    }
+    .box {
+    width: calc(100% - 20px);
+    }
+    }
+block content
+  .Profile-Main 
+    #Profile-Header
+      //allows profile pics based on user_id
+      img#Profile-Pic(src="/images/"+user.user_id+".png", alt='Profile Photo')
+      //calculates age       
+      #First-Look
+        h1 #{user.first_name}, #{user.age}
+        |                 
+        p #{user.job}
+    |         
+    #Bio #{user.bio}
+    //This pulls data from the details of the person from the user and preference table
+    #Profile-Details
+      .box(style='background-color: rgba(241, 20, 20, .2);') #{user.country}
+      |             
+      .box(style='background-color: rgba(24, 85, 177, .2);') #{user.politics}
+      |             
+      .box(style='background-color: rgba(150, 106, 87, .2);') #{user.religion}
+      |             
+      .box(style='background-color: rgba(188, 213, 251, .2);') #{user.preferences["noise"]}
+      |             
+      .box(style='background-color: rgba(233, 237, 46, .2);') #{user.preferences["pets"]}
+      |             
+      .box(style='background-color: rgba(81, 122, 85, .2);') #{user.preferences["groceries"]}
+      |             
+      .box(style='background-color: rgba(168, 62, 177, .2);') #{user.preferences["schedule"]}
+      |             
+      .box(style='background-color: rgba(255, 198, 130, .2);') #{user.preferences["cleanliness"]}
+      |             
+      //.box(style='background-color: rgba(137, 247, 85, .2);') #{data[0].organized}
+      |             
+      .box(style='background-color: rgba(209, 151, 0, .2);') #{user.preferences["guests"]}
+      |             
+      .box(style='background-color: rgba(221, 113, 230, .2);') #{user.gender}

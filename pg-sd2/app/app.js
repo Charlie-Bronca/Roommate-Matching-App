@@ -11,6 +11,9 @@ app.set('views', './app/views');
 // Add static files location for images
 app.use(express.static("static"));
 
+//Code below can be used if we are not using an HTML form to submit
+//app.use(express.json());
+
 // Get the functions in the db.js file to use
 const db = require('./services/db');
 
@@ -21,7 +24,7 @@ const { User } = require("./models/user");
 const { Chat } = require("./models/chat");
 
 //Get Review Class
-const { Review } = require('.models/review');
+const { Review } = require("./models/Review");
 
 // Create a route for root - /
 app.get("/", function(req, res) {
@@ -51,19 +54,41 @@ app.get("/questionnaire", function(req, res) {
 });
 
 
-app.get("/user_profile/56789", function(req, res) {
-    var sql = 'SELECT * FROM users JOIN preferences ON users.user_id = preferences.user_id WHERE users.user_id = 27476';
-    //var sql = 'select * from users where user_id = 56789';
+app.get("/user_profile/:user_id", async function(req, res) {
+    let user_id = req.params.user_id;
+    let user = new User(user_id);
+    await user.getFirstName();
+    await user.getLastName();
+    await user.getDOB();
+    await user.getGender();
+    await user.getPolitics();
+    await user.getReligion();
+    await user.getCountry();
+    await user.getBio();
+    await user.getPreferences();
+    await user.getAge();
+    console.log(user);
+    //res.send(user);
+    res.render('user_profile_oop', {user:user})
 
-    db.query(sql).then(results => {
-        /*const dataWithAge = results.map(row => {
-            const dob = row.dob; 
-            const age = calculateAge(dob); 
-            return { firstName: row.first_name, age };
-        });*/
-        console.log(results)
-        res.render('user_profile', {data: results});
-    });
+});
+
+//Data for chat, added for Sprint4
+app.get("/chat", async function(req, res) {
+    const chatData = {
+        chat_id: 'chat1',
+        sender_id: 'user1',
+        recipient_id: 'user2',
+        timestamp: new Date(),
+        message: 'Hello, Bob!'
+    };
+
+    const chat = new Chat(chatData.chat_id, chatData.sender_id, chatData.recipient_id, chatData.timestamp, chatData.message);
+
+    const senderName = await chat.getSenderName();
+    const recipientName = await chat.getRecipientName();
+
+    res.render('chat', { senderName, recipientName, chatData });
 });
 
 
@@ -94,6 +119,7 @@ app.get("/chat", function(req, res) {
     res.render('chat');
 });
 
+
 app.get("/login", function(req, res) {
     res.render('login');
 });
@@ -119,17 +145,23 @@ app.get("/chat_test", function(req, res) {
     res.render('chat_test');
 });
 
-//app.use(bodyParser.urlencoded({ extended: true }));
-//The above line is just incase we connect this to an HTML form
-
-app.get("/reviews", async(req, res) => {
-    const { review, date, user_id } = req.body;
-    await Review.newReview(review, date, user_id);
-    res.send('Thank you for your review!');
+app.get("/reviews", async (req, res) => {
+    const user_id = await fetchUserById(req.params.user_id)
+    res.render('reviews', { user_id });
 });
 
 /*app.get("/reviews", function(req, res) {
     res.render('reviews');
+});*/
+
+//The line below is just incase we connect this to an HTML form
+//app.use(bodyParser.urlencoded({ extended: true }));
+
+//The following will be connected when handling form submission
+/*app.post("/reviews", async(req, res) => {
+    const { review, date, user_id } = req.body;
+    await Review.newReview(review, date, user_id);
+    res.send('Thank you for your review!');
 });*/
 
 // Start server on port 3000
