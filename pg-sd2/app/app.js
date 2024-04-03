@@ -14,6 +14,8 @@ app.use(express.static("static"));
 // Get the functions in the db.js file to use
 const db = require('./services/db');
 
+const { Review } = require('./reviews');
+
 // Create a route for root - /
 app.get("/", function(req, res) {
     // Set up an array of data
@@ -110,9 +112,18 @@ app.get("/chat_test", function(req, res) {
     res.render('chat_test');
 });
 
-app.get("/reviews", function(req, res) {
-    res.render('reviews');
+//app.use(bodyParser.urlencoded({ extended: true }));
+//The above line is just incase we connect this to an HTML form
+
+app.get("/reviews", async(req, res) => {
+    const { review, date, user_id } = req.body;
+    await Review.newReview(review, date, user_id);
+    res.send('Thank you for your review!');
 });
+
+/*app.get("/reviews", function(req, res) {
+    res.render('reviews');
+});*/
 
 // Start server on port 3000
 app.listen(3000,function(){

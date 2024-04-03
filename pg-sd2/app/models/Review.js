@@ -27,10 +27,16 @@ class Review{
         return this.date;
     }
 
-    static async getReviewID(review_id) {
+    static async getReviewId(review_id) {
         const sql = 'SELECT * FROM chats WHERE review_id = ?';
         const result = await db.query(sql, [review_id]);
         return result[0]; 
+    }
+
+    static async newReview(review, date, user_id) {
+        const sql = 'INSERT INTO reviews (review, date, user_id) VALUES (?, ?, ?)';
+        const result = await db.query(sql, [review, date, user_id]);
+        return result;
     }
 }
 
