@@ -11,6 +11,9 @@ app.set('views', './app/views');
 // Add static files location for images
 app.use(express.static("static"));
 
+//Code below can be used if we are not using an HTML form to submit
+//app.use(express.json());
+
 // Get the functions in the db.js file to use
 const db = require('./services/db');
 
@@ -19,6 +22,9 @@ const { User } = require("./models/user");
 
 //Get Chat Class
 const { Chat } = require("./models/chat");
+
+//Get Review Class
+const { Review } = require("./models/Review");
 
 // Create a route for root - /
 app.get("/", function(req, res) {
@@ -139,9 +145,24 @@ app.get("/chat_test", function(req, res) {
     res.render('chat_test');
 });
 
-app.get("/reviews", function(req, res) {
-    res.render('reviews');
+app.get("/reviews", async (req, res) => {
+    const user_id = await fetchUserById(req.params.user_id)
+    res.render('reviews', { user_id });
 });
+
+/*app.get("/reviews", function(req, res) {
+    res.render('reviews');
+});*/
+
+//The line below is just incase we connect this to an HTML form
+//app.use(bodyParser.urlencoded({ extended: true }));
+
+//The following will be connected when handling form submission
+/*app.post("/reviews", async(req, res) => {
+    const { review, date, user_id } = req.body;
+    await Review.newReview(review, date, user_id);
+    res.send('Thank you for your review!');
+});*/
 
 // Start server on port 3000
 app.listen(3000,function(){
