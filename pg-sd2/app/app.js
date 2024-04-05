@@ -92,6 +92,21 @@ app.get("/chat", async function(req, res) {
 });
 
 
+app.post('/submit_profile', function (req,res) {
+    // get submitted value
+    params = req.body;
+    // Note that we need the id to get update the correct user
+    var user = new user(params.id)
+    try {
+        user.adduserbio(params.note).then(result => {
+            res.send('form submitted')
+        })
+    }catch (err) {
+        console.error('Error while adding bio', err.message);
+    }
+   
+});
+
 
 /*
 function calculateAge(dob) {
