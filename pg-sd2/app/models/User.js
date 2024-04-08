@@ -12,6 +12,7 @@ class User{
     country;
     preferences = {};
     age;
+    // user_bio; //hannan
 
     constructor(user_id){
         this.user_id = user_id;
@@ -96,6 +97,17 @@ class User{
         
     }
 
+    // //hannan
+    // async addUserbio(user_bio) {
+
+    //     var sql = "UPDATE users SET user_bio = ? WHERE user_id = ?"
+    //     const results = await db.query(sql, [user_bio, this.user_bio]);
+    //             // ensure the user_bio property is up to date in model
+        
+    //         this.user_bio
+    //     return result
+    //     }
+
     async getPreferences(){
         //if (this.preferences == {}) {
         var sql = "SELECT * from preferences WHERE user_id = ?"
@@ -117,6 +129,46 @@ class User{
         //console.log("hey")
     }
 
+    // async save() {
+    //     const db = require('../services/db');
+    //     try {
+    //         const sql = "INSERT INTO users (first_name, last_name, dob, gender, religion, politics, bio, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    //         const values = [this.first_name, this.last_name, this.dob, this.gender, this.religion, this.politics, this.bio, this.country];
+    //         await db.query(sql, values);
+    //         return true; // Return true indicating successful save
+    //     } catch (error) {
+    //         console.error("Error saving user:", error);
+    //         return false; // Return false indicating failure to save
+    //     }
+    // }
+    
+    async save() {
+        const db = require('../services/db');
+        try {
+            const sql = "INSERT INTO users (first_name, last_name, dob, gender, religion, politics, bio, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            const values = [
+                this.first_name || "TestValue",
+                this.last_name || "TestValue",
+                this.dob || "2024-12-23",
+                this.gender || "TestValue",
+                this.religion || "TestValue",
+                this.politics || "TestValue",
+                this.bio || "TestValue",
+                this.country || "TestValue",
+                this.user_id||123
+            ];
+            
+            // Remove undefined values from the array
+            const definedValues = values.filter(value => value !== undefined);
+    
+            await db.query(sql, definedValues);
+            return true; // Return true indicating successful save
+        } catch (error) {
+            console.error("Error saving user:", error);
+            return false; // Return false indicating failure to save
+        }
+    }
+    
 
 }
 
