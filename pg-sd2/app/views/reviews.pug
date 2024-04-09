@@ -48,6 +48,14 @@ block head
     .stars {
     zoom: 150%;
     }
+    /*Allows for ratings*/ 
+    span.star{
+      font-size: 24px;
+      cursor: pointer;
+    }
+    span.star:hover{
+      color: #F8BD00;
+    }
     .text-box {
     width: 70%;
     margin-top: 45px;
@@ -75,10 +83,15 @@ block head
     }
     .submit {
     }
-  
+
+  // Include jQuery library
+  script(src='https://code.jquery.com/jquery-3.6.0.min.js')
+
+  // Include your external JavaScript file
+  script(type='module').
+    import { handleStarClick } from '/js/script.js';
+    handleStarClick();
  
-
-
 block content 
   .Review
     .review-box
@@ -87,18 +100,18 @@ block content
       p.title-p Click the stars to rate us:
       |            
       .stars
-        | &star;
-        | &star;
-        | &star;
-        | &star;
-        | &star;
+        span(data-rating="1") ★
+        span(data-rating="2") ★
+        span(data-rating="3") ★
+        span(data-rating="4") ★
+        span(data-rating="5") ★
       |            
       .text-box
         p.text-box-label Review:
       |            
       .box
-      |            
-      .submit-button
-        p.submit SUBMIT
+      form(action="/submit-review", method="post" id="review-form")
+        input(type="hidden", name="rating", id="rating-input")       
+        button.submit-button(type="submit") SUBMIT
 
   

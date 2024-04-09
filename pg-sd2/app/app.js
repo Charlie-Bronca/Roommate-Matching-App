@@ -145,14 +145,14 @@ app.get("/chat_test", function(req, res) {
     res.render('chat_test');
 });
 
-app.get("/reviews", async (req, res) => {
+/*app.get("/reviews", async (req, res) => {
     const user_id = await fetchUserById(req.params.user_id)
     res.render('reviews', { user_id });
-});
-
-/*app.get("/reviews", function(req, res) {
-    res.render('reviews');
 });*/
+
+app.get("/reviews", function(req, res) {
+    res.render('reviews');
+});
 
 //The line below is just incase we connect this to an HTML form
 //app.use(bodyParser.urlencoded({ extended: true }));
