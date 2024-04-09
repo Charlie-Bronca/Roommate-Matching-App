@@ -88,26 +88,9 @@ block head
     }
     .submit {
     }
-
-  // Include jQuery library
-  //script(src='https://code.jquery.com/jquery-3.6.0.min.js')
-
-  // Include your external JavaScript file
-  //script(src='/app.script.js')
-  //script(type='module').
-    import { handleStarClick } from '/app/script.js';
-    handleStarClick();
  
 block content 
   .Review
-    // Inline JavaScript for handling star clicks
-    //script.
-      $(document).ready(function() {
-        $('.star').on('click', function() {
-          const rating = $(this).data('rating');
-          $('#rating-input').val(rating);
-        });
-      });
     .review-box
       p.title Leave a review
       |            
