@@ -47,6 +47,8 @@ block head
     }
     .stars {
     zoom: 150%;
+    font-size: 24px;
+    cursor: pointer;
     }
     /*Allows for ratings*/ 
     span.star{
@@ -55,6 +57,9 @@ block head
     }
     span.star:hover{
       color: #F8BD00;
+    }
+    .glow {
+    color: #F8BD00;
     }
     .text-box {
     width: 70%;
@@ -85,15 +90,24 @@ block head
     }
 
   // Include jQuery library
-  script(src='https://code.jquery.com/jquery-3.6.0.min.js')
+  //script(src='https://code.jquery.com/jquery-3.6.0.min.js')
 
   // Include your external JavaScript file
-  script(type='module').
-    import { handleStarClick } from '/js/script.js';
+  //script(src='/app.script.js')
+  //script(type='module').
+    import { handleStarClick } from '/app/script.js';
     handleStarClick();
  
 block content 
   .Review
+    // Inline JavaScript for handling star clicks
+    //script.
+      $(document).ready(function() {
+        $('.star').on('click', function() {
+          const rating = $(this).data('rating');
+          $('#rating-input').val(rating);
+        });
+      });
     .review-box
       p.title Leave a review
       |            
@@ -113,5 +127,27 @@ block content
       form(action="/submit-review", method="post" id="review-form")
         input(type="hidden", name="rating", id="rating-input")       
         button.submit-button(type="submit") SUBMIT
-
-  
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      const stars = document.querySelectorAll('.stars span[data-rating]');
+      stars.forEach(star => {
+        star.addEventListener('click', () => {
+          removeGlow();
+          glowStars(star);
+        });
+      });
+      function removeGlow() {
+        const glowingStars = document.querySelectorAll('.glow');
+        glowingStars.forEach(star => {
+          star.classList.remove('glow');
+        });
+      }
+      function glowStars(selectedStar) {
+        let previousStars = selectedStar.previousElementSibling;
+        while (previousStars) {
+          previousStars.classList.add('glow');
+          previousStars = previousStars.previousElementSibling;
+        }
+        selectedStar.classList.add('glow');
+      }
+    });

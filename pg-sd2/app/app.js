@@ -10,6 +10,13 @@ app.set('views', './app/views');
 
 // Add static files location for images
 app.use(express.static("static"));
+/*app.use('/app', express.static('app', {
+    setHeaders: (res, path, stat) => {
+        if (path.endsWith('.js')) {
+            res.set('Content-Type', 'application/javascript');
+        }
+    }
+}));*/
 
 //Code below can be used if we are not using an HTML form to submit
 //app.use(express.json());
