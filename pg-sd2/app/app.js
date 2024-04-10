@@ -166,7 +166,7 @@ app.post("/submit_profile", async function (req, res) {
 app.post("/submit_review", async function (req, res) {
   try {
     console.log("Received review data:", req.body);
-
+    
     // Validate the submitted data
     const requiredFields = ['user_id', 'rating', 'comment']; // Define required fields for a review
     for (const field of requiredFields) {
@@ -180,7 +180,7 @@ app.post("/submit_review", async function (req, res) {
 
     // Save the new review to the database
     const savedReview = await newReview.save();
-
+    
     if (!savedReview) {
       throw new Error("Error saving review data");
     }
