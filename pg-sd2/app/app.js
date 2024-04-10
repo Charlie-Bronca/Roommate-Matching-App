@@ -11,8 +11,10 @@ app.set("views", "./app/views");
 // Add static files location for images
 app.use(express.static("static"));
 
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+
+//const bodyParser = require("body-parser");
+//app.use(bodyParser.urlencoded({ extended: true }));
 
 //Code below can be used if we are not using an HTML form to submit
 //app.use(express.json());
@@ -61,6 +63,7 @@ app.get("/questionnaire", function (req, res) {
 app.get("/user_profile/:user_id", async function (req, res) {
   let user_id = req.params.user_id;
   let user = new User(user_id);
+  /*
   await user.getFirstName();
   await user.getLastName();
   await user.getDOB();
@@ -69,8 +72,10 @@ app.get("/user_profile/:user_id", async function (req, res) {
   await user.getReligion();
   await user.getCountry();
   await user.getBio();
+  */
+  await user.getUserDetails();
   await user.getPreferences();
-  await user.getAge();
+  //await user.getAge();
   console.log(user);
   //res.send(user);
   res.render("user_profile_oop", { user: user });
@@ -128,6 +133,22 @@ app.get("/chat", async function (req, res) {
 // });
 
 app.post("/submit_profile", async function (req, res) {
+  params = req.body;
+  console.log(params)
+  var user = new User(params.id);
+  
+  try {
+    await user.addUserDetails(params.first_name, params.last_name, params.dob, params.job, params.gender, params.religion, params.politics, params.bio, params.country);
+    res.send('form submitted');
+   }
+   catch (err) {
+       console.error(`Error while adding bio `, err.message);
+   }
+   res.send('form submitted');
+  
+
+
+    /*
     try {
     console.log("this is Body", req.body, "body end");
         
@@ -154,6 +175,7 @@ app.post("/submit_profile", async function (req, res) {
       console.error("Error creating profile:", err.message);
       res.status(500).send("Internal server error");
     }
+    */
   });
   
 /*
@@ -186,17 +208,25 @@ app.get("/login", function (req, res) {
   res.render("login");
 });
 
-app.get("/user_profile/test/:user_id", function (req, res) {
+app.get("/user_profile/test/:user_id", async function (req, res) {
   let user_id = req.params.user_id;
-  let one_user_sql = "select * from users where user_id = ?";
-  var one_sql =
-    "SELECT * FROM users JOIN preferences ON users.user_id = preferences.user_id WHERE users.user_id = ?";
-
-  db.query(one_sql, [user_id]).then((results) => {
-    console.log(results);
-    res.render("user_profile", { data: results });
-    //res.render("single_student", {'data': results});
-  });
+  let user = new User(user_id);
+  /*
+  await user.getFirstName();
+  await user.getLastName();
+  await user.getDOB();
+  await user.getGender();
+  await user.getPolitics();
+  await user.getReligion();
+  await user.getCountry();
+  await user.getBio();
+  */
+  await user.getUserDetails()
+  await user.getPreferences();
+  //await user.getAge();
+  console.log(user);
+  //res.send(user);
+  res.render("user_profile_post", { user: user });
 });
 
 app.get("/homepage_test", function (req, res) {
@@ -225,6 +255,20 @@ app.get("/reviews", async (req, res) => {
     await Review.newReview(review, date, user_id);
     res.send('Thank you for your review!');
 });*/
+
+app.post('/add-bio', async function (req, res) {
+  params = req.body;
+  var user = new User(params.id);
+  try {
+    await user.addBio(params.bio);
+    res.send('form submitted');
+   }
+   catch (err) {
+       console.error(`Error while adding bio `, err.message);
+   }
+   res.send('form submitted');
+});
+
 
 // Start server on port 3000
 app.listen(3000, function () {
