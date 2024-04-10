@@ -5,6 +5,7 @@ class User{
     first_name;
     last_name;
     dob;
+    job;
     gender;
     religion;
     politics;
@@ -18,15 +19,34 @@ class User{
         this.user_id = user_id;
     }
 
-    async getFirstName(){
+    calcAge(dob){
+        var today = new Date();
+        var birthDate = dob;
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {age--;}
+        return age
+    }
+
+    async getUserDetails(){
         if (typeof this.first_name !== 'string') {
             var sql = "SELECT * from users WHERE user_id = ?"
             const results = await db.query(sql, [this.user_id]);
             this.first_name = results[0].first_name;
+            this.last_name = results[0].last_name;
+            this.dob = new Date(results[0].dob);
+            this.job = results[0].job;
+            this.gender = results[0].gender;
+            this.religion = results[0].religion;
+            this.politics = results[0].politics;
+            this.country = results[0].country;
+            this.bio = results[0].bio;
+            this.age = this.calcAge(this.dob)
             //this.first_name = "Steve"
         }
     }
 
+/*
     async getLastName(){
         if (typeof this.last_name !== 'string') {
             var sql = "SELECT * from users WHERE user_id = ?"
@@ -44,7 +64,7 @@ class User{
         }
     }
 
-    getAge(){
+    calcAge(){
         var today = new Date();
         var birthDate = this.dob;
         var age = today.getFullYear() - birthDate.getFullYear();
@@ -96,6 +116,7 @@ class User{
         }
         
     }
+*/
 
     // //hannan
     // async addUserbio(user_bio) {
@@ -167,6 +188,29 @@ class User{
             console.error("Error saving user:", error);
             return false; // Return false indicating failure to save
         }
+    }
+
+    async addBio(bio) {
+        var sql = "UPDATE users SET users.bio = ? WHERE users.user_id = ?"
+        const result = await db.query(sql, [bio, this.user_id]);
+        this.bio = bio;
+        return result;
+    }
+
+    async addUserDetails(first_name, last_name, dob, job, gender, religion, politics, bio, country){
+        var sql = "UPDATE users SET first_name = ? , last_name = ? , dob = ? , job = ? , gender = ? , religion = ? , politics = ? , bio = ?, country = ? WHERE user_id = ?"
+        const result = await db.query(sql, [first_name, last_name, dob, job, gender, religion, politics, bio, country, this.user_id]);
+        this.first_name = first_name
+        this.last_name = last_name
+        this.dob = new Date(dob);
+        this.job = job
+        this.gender  = gender
+        this.religion = religion
+        this.politics = politics
+        this.bio = bio
+        this.country = country
+        this.age = this.calcAge(this.dob)
+        return result;
     }
     
 
