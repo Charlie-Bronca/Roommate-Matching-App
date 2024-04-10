@@ -10,16 +10,6 @@ app.set('views', './app/views');
 
 // Add static files location for images
 app.use(express.static("static"));
-/*app.use('/app', express.static('app', {
-    setHeaders: (res, path, stat) => {
-        if (path.endsWith('.js')) {
-            res.set('Content-Type', 'application/javascript');
-        }
-    }
-}));*/
-
-//Code below can be used if we are not using an HTML form to submit
-//app.use(express.json());
 
 // Get the functions in the db.js file to use
 const db = require('./services/db');
@@ -97,21 +87,6 @@ app.get("/chat", async function(req, res) {
 
     res.render('chat', { senderName, recipientName, chatData });
 });
-
-
-
-/*
-function calculateAge(dob) {
-    const dobDate = new Date(dob);
-    const currentDate = new Date();
-    let age = currentDate.getFullYear() - dobDate.getFullYear();
-    const dobMonth = dobDate.getMonth();
-    const currentMonth = currentDate.getMonth();
-    if (currentMonth < dobMonth || (currentMonth === dobMonth && currentDate.getDate() < dobDate.getDate())) {
-        age--;
-    }
-    return age;
-}*/
 
 app.get("/profiles", function(req, res) {
     var sql = 'select * from users';

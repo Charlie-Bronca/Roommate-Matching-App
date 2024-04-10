@@ -20,7 +20,11 @@ class Review{
     }
 
     async getReview() {
-        return this.review;
+        if (typeof this.review !== 'string') {
+            var sql = "SELECT * from reviews WHERE user_id = ?"
+            const results = await db.query(sql, [this.user_id]);
+            this.review = results[0].review;
+        }
     }
 
     async getDate() {
