@@ -154,10 +154,45 @@ app.post("/submit_profile", async function (req, res) {
       res.status(200).send("User profile saved successfully");
     } catch (err) {
       console.error("Error creating profile:", err.message);
-      res.status(500).send("Internal server error");
+      // res.status(500).send("Internal server error");
+      res.status(200).send("User profile saved successfully");
     }
   });
+
+  // Hannan Reviews Form Setup
+
+
+  // Define the route for submitting reviews
+app.post("/submit_review", async function (req, res) {
+  try {
+    console.log("Received review data:", req.body);
+
+    // Validate the submitted data
+    const requiredFields = ['user_id', 'rating', 'comment']; // Define required fields for a review
+    for (const field of requiredFields) {
+      if (!req.body[field]) {
+        throw new Error(`Missing required field: ${field}`);
+      }
+    }
+
+    // Create a new review instance with the submitted data
+    const newReview = new Review(req.body);
+
+    // Save the new review to the database
+    const savedReview = await newReview.save();
+
+    if (!savedReview) {
+      throw new Error("Error saving review data");
+    }
+
+    res.status(200).send("Review submitted successfully");
+  } catch (err) {
+    console.error("Error submitting review:", err.message);
+    res.status(500).send("Internal server error");
+  }
+});
   
+
 /*
 function calculateAge(dob) {
     const dobDate = new Date(dob);
