@@ -11,8 +11,9 @@ app.set("views", "./app/views");
 // Add static files location for images
 app.use(express.static("static"));
 
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true }));
+//Tanya originally had this commented out because we were not using it
+/*const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));*/
 
 //Code below can be used if we are not using an HTML form to submit
 //app.use(express.json());
@@ -129,7 +130,8 @@ app.get("/chat", async function (req, res) {
 
 // HANNAN QUESTIONNAIRE PAGE
 
-app.post("/submit_profile", async function (req, res) {
+// ??? code
+/*app.post("/submit_profile", async function (req, res) {
     try {
     console.log("this is Body", req.body, "body end");
         
@@ -157,13 +159,13 @@ app.post("/submit_profile", async function (req, res) {
       // res.status(500).send("Internal server error");
       res.status(200).send("User profile saved successfully");
     }
-  });
+  });*/
 
   // Hannan Reviews Form Setup
 
 
   // Define the route for submitting reviews
-app.post("/submit_review", async function (req, res) {
+/*app.post("/submit_review", async function (req, res) {
   try {
     console.log("Received review data:", req.body);
     
@@ -190,7 +192,7 @@ app.post("/submit_review", async function (req, res) {
     console.error("Error submitting review:", err.message);
     res.status(500).send("Internal server error");
   }
-});
+});*/
   
 
 /*
@@ -249,9 +251,9 @@ app.get("/reviews", async (req, res) => {
   res.render("reviews", { user_id });
 });
 
-/*app.get("/reviews", function(req, res) {
+app.get("/reviews", function(req, res) {
     res.render('reviews');
-});*/
+});
 
 //The line below is just incase we connect this to an HTML form
 //app.use(bodyParser.urlencoded({ extended: true }));
