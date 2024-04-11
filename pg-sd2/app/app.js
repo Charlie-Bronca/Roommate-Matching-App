@@ -28,7 +28,7 @@ const { User } = require("./models/user");
 const { Chat } = require("./models/chat");
 
 //Get Review Class
-const { Review } = require("./models/Review");
+const { Review } = require("./models/review");
 
 // Create a route for root - /
 app.get("/", function (req, res) {
@@ -257,10 +257,10 @@ app.get("/chat_test", function (req, res) {
   res.render("chat_test");
 });
 
-app.get("/reviews", async (req, res) => {
+/*app.get("/reviews", async (req, res) => {
   const user_id = await fetchUserById(req.params.user_id);
   res.render("reviews", { user_id });
-});
+});*/
 
 app.get("/reviews", function(req, res) {
     res.render('reviews');
