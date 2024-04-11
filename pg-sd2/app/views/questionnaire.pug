@@ -265,6 +265,7 @@ block content
           path(fill='currentColor', d='M11 16V7.85l-2.6 2.6L7 9l5-5l5 5l-1.4 1.45l-2.6-2.6V16zm-5 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z')
         |  Upload profile photo
     form.data-profile(action="/submit_profile", method="POST")
+      input(type='hidden' name='id' value=8)
       // First Section: Personal Information
       .form-name
         .form-group
@@ -277,72 +278,73 @@ block content
       .form-birthday-nationality
         .form-group
           label(for='birthday') Birthday:
-          .date-input
-            input.day(type='text', placeholder='DD')
+          input(type='date' name='dob')
+          //.date-input
+            input.day(type='text', name='day', placeholder='DD')
             span.separator /
-            input.month(type='text', placeholder='MM')
+            input.month(type='text', name='month', placeholder='MM')
             span.separator /
-            input.year(type='text', placeholder='YY')
+            input.year(type='text', name='year', placeholder='YY')
         .form-group
           label(for='nationality') Nationality:
-          input#nationality.form-control(type='text', name='nationality', placeholder='')
+          input#nationality.form-control(type='text', name='country', placeholder='')
       // Third Section: Occupation
       .form-occupation
         .form-group
           label(for='occupation') Occupation:
-          input#occupation(type='text', name='occupation', placeholder='', maxlength='20')
+          input#occupation(type='text', name='job', placeholder='', maxlength='20')
       // Fourth Section: Gender, Politics, Religion
       .preferencesGPR
         .preference-group
           label Gender:
           div
-            input#male(type='radio', name='gender', value='male')
+            input#male(type='radio', name='gender', value='Male')
             label.choice(for='male') Male
           div
-            input#female(type='radio', name='gender', value='female')
+            input#female(type='radio', name='gender', value='Female')
             label.choice(for='female') Female
           div
-            input#other(type='radio', name='gender', value='other')
+            input#other(type='radio', name='gender', value='Other')
             label.choice(for='other') Other
         .preference-group
           label Politics:
           div
-            input#liberal(type='radio', name='politics', value='liberal')
+            input#liberal(type='radio', name='politics', value='Liberal')
             label.choice(for='liberal') Liberal
           div
-            input#conservative(type='radio', name='politics', value='conservative')
+            input#conservative(type='radio', name='politics', value='Conservative')
             label.choice(for='conservative') Conservative
           div
-            input#prefer_not_to_say_politics(type='radio', name='politics', value='prefer_not_to_say')
+            input#prefer_not_to_say_politics(type='radio', name='politics', value='Prefer not to say')
             label.choice(for='prefer_not_to_say_politics') Prefer not to say
         .preference-group
           label Religion:
           div
-            input#protestant(type='radio', name='religion', value='protestant')
+            input#protestant(type='radio', name='religion', value='Protestant')
             label.choice(for='protestant') Protestant
           div
-            input#catholic(type='radio', name='religion', value='catholic')
+            input#catholic(type='radio', name='religion', value='Catholic')
             label.choice(for='catholic') Catholic
           div
-            input#muslim(type='radio', name='religion', value='muslim')
+            input#muslim(type='radio', name='religion', value='Muslim')
             label.choice(for='muslim') Muslim
           div
-            input#hindu(type='radio', name='religion', value='hindu')
+            input#hindu(type='radio', name='religion', value='Hindu')
             label.choice(for='hindu') Hindu
           div
-            input#sikh(type='radio', name='religion', value='sikh')
+            input#sikh(type='radio', name='religion', value='Sikh')
             label.choice(for='sikh') Sikh
           div
-            input#spiritual(type='radio', name='religion', value='spiritual')
+            input#spiritual(type='radio', name='religion', value='Spiritual')
             label.choice(for='spiritual') Spiritual but not religious
           div
-            input#other_religion(type='radio', name='religion', value='other')
+            input#other_religion(type='radio', name='religion', value='Other')
             label.choice(for='other_religion') Other
           div
-            input#none(type='radio', name='religion', value='none')
+            input#none(type='radio', name='religion', value='None')
             label.choice(for='none') None
           div
-            input#prefer_not_to_say_religion(type='radio', name='religion', value='prefer_not_to_say')
+            input#prefer_not_to_say_religion(type='radio', name='religion', value='Prefer not to say')
             label.choice(for='prefer_not_to_say_religion') Prefer not to say
       // Fifth Section: Noise, Pets, Gender Preference, Smoking
       .preferenceNPGS
