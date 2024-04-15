@@ -47,6 +47,19 @@ block head
     }
     .stars {
     zoom: 150%;
+    font-size: 24px;
+    cursor: pointer;
+    }
+    /*Allows for ratings*/ 
+    span.star{
+      font-size: 24px;
+      cursor: pointer;
+    }
+    span.star:hover{
+      color: #F8BD00;
+    }
+    .glow {
+    color: #F8BD00;
     }
     .text-box {
     width: 70%;
@@ -75,10 +88,7 @@ block head
     }
     .submit {
     }
-  
  
-
-
 block content 
   form.Review(action="/submit_review", method="POST")
     .review-box
@@ -87,18 +97,40 @@ block content
       p.title-p Click the stars to rate us:
       |            
       .stars
-        | &star;
-        | &star;
-        | &star;
-        | &star;
-        | &star;
+        span(data-rating="1") ★
+        span(data-rating="2") ★
+        span(data-rating="3") ★
+        span(data-rating="4") ★
+        span(data-rating="5") ★
       |            
       .text-box
         p.text-box-label Review:
       |            
       .box
-      |            
-      .submit-button
-        p.submit SUBMIT
-
-  
+      form(action="/submit-review", method="post" id="review-form")
+        input(type="hidden", name="rating", id="rating-input")       
+        button.submit-button(type="submit") SUBMIT
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      const stars = document.querySelectorAll('.stars span[data-rating]');
+      stars.forEach(star => {
+        star.addEventListener('click', () => {
+          removeGlow();
+          glowStars(star);
+        });
+      });
+      function removeGlow() {
+        const glowingStars = document.querySelectorAll('.glow');
+        glowingStars.forEach(star => {
+          star.classList.remove('glow');
+        });
+      }
+      function glowStars(selectedStar) {
+        let previousStars = selectedStar.previousElementSibling;
+        while (previousStars) {
+          previousStars.classList.add('glow');
+          previousStars = previousStars.previousElementSibling;
+        }
+        selectedStar.classList.add('glow');
+      }
+    });

@@ -168,3 +168,10 @@ block content
       .box(style='background-color: rgba(209, 151, 0, .2);') #{user.preferences["guests"]}
       |             
       .box(style='background-color: rgba(221, 113, 230, .2);') #{user.gender}
+    
+    h2 Add a bio about this person
+    form(action='/add-bio', method='POST')
+        input(type='hidden' name='id' value=user.user_id)
+        textarea(name='bio' rows=6 cols=50)
+        div 
+        input(type='submit' value='Submit')
