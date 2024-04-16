@@ -64,8 +64,19 @@ block head
     .text-box {
     width: 70%;
     margin-top: 45px;
+    .review-text{
+        width: 75%;
+    height: 200px;
+    border-radius: 25px;
+    border: solid;
+    margin-left:15%;
+    }
     }
     .text-box-label {
+      margin-left:15%;
+      font-family: "Times New Roman", Times, serif;
+      padding-left:5%;
+      font-size:large;
     }
     .box {
     width: 75%;
@@ -85,6 +96,8 @@ block head
     background-color: rgb(from #FE6941 r g b / 75%);
     box-shadow: inset 0 0 2px;
     border: solid;
+    margin-left: 50%;
+    cursor:pointer;
     }
     .submit {
     }
@@ -105,11 +118,12 @@ block content
       |            
       .text-box
         p.text-box-label Review:
-      |            
-      .box
-      form(action="/submit-review", method="post" id="review-form")
-        input(type="hidden", name="rating", id="rating-input")       
+        textarea(class="review-text", name="review-text", rows="5", cols="50", required)
         button.submit-button(type="submit") SUBMIT
+      |            
+      
+      
+
   script.
     document.addEventListener('DOMContentLoaded', function() {
       const stars = document.querySelectorAll('.stars span[data-rating]');
@@ -134,3 +148,5 @@ block content
         selectedStar.classList.add('glow');
       }
     });
+
+

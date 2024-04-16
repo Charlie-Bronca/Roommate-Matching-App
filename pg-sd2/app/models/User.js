@@ -190,6 +190,30 @@ class User{
         }
     }
 
+    // async save() {
+    //     const db = require('../services/db');
+    //     try {
+    //         const sql = "INSERT INTO users (first_name, last_name, dob, gender, religion, politics, bio, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    //         const values = [
+    //             this.first_name,
+    //             this.last_name,
+    //             this.dob,
+    //             this.gender,
+    //             this.religion,
+    //             this.politics,
+    //             this.bio,
+    //             this.country
+    //         ];
+    //         await db.query(sql, values);
+    //         return true; // Return true indicating successful save
+    //     } catch (error) {
+    //         console.error("Error saving user:", error);
+    //         return false; // Return false indicating failure to save
+    //     }
+    // }
+    
+
+
     async addBio(bio) {
         var sql = "UPDATE users SET users.bio = ? WHERE users.user_id = ?"
         const result = await db.query(sql, [bio, this.user_id]);
