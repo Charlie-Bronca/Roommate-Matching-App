@@ -1,5 +1,4 @@
 const db = require('../services/db');
-
 class Review{
     review_id;
     review;
@@ -21,8 +20,8 @@ class Review{
 
     async getReview() {
         if (typeof this.review !== 'string') {
-            var sql = "SELECT * from reviews WHERE user_id = ?"
-            const results = await db.query(sql, [this.user_id]);
+            var sql = "SELECT review from reviews WHERE review_id = ?"
+            const results = await db.query(sql, [this.review_id]);
             this.review = results[0].review;
         }
     }
@@ -32,7 +31,7 @@ class Review{
     }
 
     static async getReviewId(review_id) {
-        const sql = 'SELECT * FROM chats WHERE review_id = ?';
+        const sql = 'SELECT review FROM reviews WHERE review_id = ?';
         const result = await db.query(sql, [review_id]);
         return result[0]; 
     }

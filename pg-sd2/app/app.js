@@ -51,8 +51,21 @@ app.get("/flat_buddies_test", function (req, res) {
   });
 });
 
-app.get("/homepage", function (req, res) {
+/*app.get("/homepage", function (req, res) {
   res.render("homepage");
+});*/
+
+app.get("/homepage", async function (req, res) {
+  let review_id = req.query.review_id;
+  let review1 = new Review (review_id);
+  let review2 = new Review (review_id);
+  let review3 = new Review (review_id);
+
+  await review1.getReviewId([1]);
+  await review2.getReviewId([3]);
+  await review3.getReviewId([2]);
+  
+  res.render("homepage", {review1, review2, review3});
 });
 
 app.get("/questionnaire", function (req, res) {
