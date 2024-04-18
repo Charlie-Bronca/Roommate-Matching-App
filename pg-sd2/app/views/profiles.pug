@@ -102,7 +102,8 @@ block content
         for item in data 
             
             div.profile_card
-                - const pic_style = "height: 60%; width: 100%; background-image: url('/images/"+item.user_id+".png'); background-position: center; background-repeat: no-repeat; background-size: cover; border-radius: 20px 20px 0px 0px;"
+                - const pic_num = String(item.user_id).padStart(5, '0');
+                - const pic_style = "height: 60%; width: 100%; background-image: url('/images/"+pic_num+".png'); background-position: center; background-repeat: no-repeat; background-size: cover; border-radius: 20px 20px 0px 0px;"
                 //div(style="height: 60%; width: 100%; background-image: url('/images/13436.png'); background-position: center; background-repeat: no-repeat; background-size: cover; border-radius: 20px 20px 0px 0px;")
                 div(style=pic_style)
 
@@ -119,7 +120,7 @@ block content
                             p #{age}
                     
                     div.read_more_div
-                        a(href="/user_profile/test/"+ item.user_id).read_more Read more.
+                        a(href="/user_profile/"+ item.user_id).read_more Read more.
                 
             //tr  
                 td #{item.user_id}

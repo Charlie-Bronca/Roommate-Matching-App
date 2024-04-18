@@ -47,12 +47,36 @@ block head
     }
     .stars {
     zoom: 150%;
+    font-size: 24px;
+    cursor: pointer;
+    }
+    /*Allows for ratings*/ 
+    span.star{
+      font-size: 24px;
+      cursor: pointer;
+    }
+    span.star:hover{
+      color: #F8BD00;
+    }
+    .glow {
+    color: #F8BD00;
     }
     .text-box {
     width: 70%;
     margin-top: 45px;
+    .review-text{
+        width: 75%;
+    height: 200px;
+    border-radius: 25px;
+    border: solid;
+    margin-left:15%;
+    }
     }
     .text-box-label {
+      margin-left:15%;
+      font-family: "Times New Roman", Times, serif;
+      padding-left:5%;
+      font-size:large;
     }
     .box {
     width: 75%;
@@ -72,33 +96,57 @@ block head
     background-color: rgb(from #FE6941 r g b / 75%);
     box-shadow: inset 0 0 2px;
     border: solid;
+    margin-left: 50%;
+    cursor:pointer;
     }
     .submit {
     }
-  
  
-
-
 block content 
-  .Review
+  form.Review(action="/submit_review", method="POST")
     .review-box
       p.title Leave a review
       |            
       p.title-p Click the stars to rate us:
       |            
       .stars
-        | &star;
-        | &star;
-        | &star;
-        | &star;
-        | &star;
+        span(data-rating="1") ★
+        span(data-rating="2") ★
+        span(data-rating="3") ★
+        span(data-rating="4") ★
+        span(data-rating="5") ★
       |            
       .text-box
         p.text-box-label Review:
+        textarea(class="review-text", name="review-text", rows="5", cols="50", required)
+        button.submit-button(type="submit") SUBMIT
       |            
-      .box
-      |            
-      .submit-button
-        p.submit SUBMIT
+      
+      
 
-  
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      const stars = document.querySelectorAll('.stars span[data-rating]');
+      stars.forEach(star => {
+        star.addEventListener('click', () => {
+          removeGlow();
+          glowStars(star);
+        });
+      });
+      function removeGlow() {
+        const glowingStars = document.querySelectorAll('.glow');
+        glowingStars.forEach(star => {
+          star.classList.remove('glow');
+        });
+      }
+      function glowStars(selectedStar) {
+        let previousStars = selectedStar.previousElementSibling;
+        while (previousStars) {
+          previousStars.classList.add('glow');
+          previousStars = previousStars.previousElementSibling;
+        }
+        selectedStar.classList.add('glow');
+      }
+    });
+
+
