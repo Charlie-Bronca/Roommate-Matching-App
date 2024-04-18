@@ -327,8 +327,8 @@ app.get("/homepage_test", function (req, res) {
   res.render("homepage_test");
 });
 
-app.get("/chat_test", function (req, res) {
-  res.render("chat_test");
+app.get("/chat_list", function(req, res) {
+    res.render('chat_list');
 });
 
 /*app.get("/reviews", async (req, res) => {
