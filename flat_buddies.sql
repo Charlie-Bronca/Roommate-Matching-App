@@ -173,17 +173,17 @@ INSERT INTO chats (chat_id, message, timestamp, sender_id, recipient_id) VALUES
 (00008, "I was also thinking about doing something similar, maybe we can do a video call to get to know each other, this is my phone number +33871898. Call me whenever you can! :)",  "2023-12-16 17:38:25", 00004, 00005),
 (00009, "Hey everyone! How's it going?", "2024-04-19 10:00:00", 00001, 00002),
 (00010, "Hey there! Doing good, just busy with work.", "2024-04-19 10:05:00", 00002, 00003),
-(00021, "I'm great, thanks for asking! Just enjoying the day off.", "2024-04-19 10:10:00", 00003, 00004),
-(00022, "Not bad, just catching up on some reading.", "2024-04-19 10:15:00", 00004, 00005),
-(00023, "Doing well, thanks! Planning my next vacation.", "2024-04-19 10:20:00", 00005, 00006),
-(00024, "Just hanging out, enjoying some music.", "2024-04-19 10:25:00", 00006, 00007),
-(00025, "Pretty good, just finished a workout.", "2024-04-19 10:30:00", 00007, 00008),
-(00026, "Hey everyone! Let's plan a group outing this weekend.", "2024-04-19 10:35:00", 00008, 00009),
-(00027, "Sounds like a great idea! Count me in.", "2024-04-19 10:40:00", 00009, 00010),
-(00028, "I'm in too! Any suggestions on what to do?", "2024-04-19 10:45:00", 00010, 00011),
-(00029, "How about a picnic in the park?", "2024-04-19 10:50:00", 00011, 00012),
-(00030, "That sounds perfect! Let's do it.", "2024-04-19 10:55:00", 00012, 00013),
-(00031, "Great! I'll organize everything and send out details soon.", "2024-04-19 11:00:00", 00013, 00001);
+(00011, "I'm great, thanks for asking! Just enjoying the day off.", "2024-04-19 10:10:00", 00003, 00004),
+(00012, "Not bad, just catching up on some reading.", "2024-04-19 10:15:00", 00004, 00005),
+(00013, "Doing well, thanks! Planning my next vacation.", "2024-04-19 10:20:00", 00005, 00006),
+(00014, "Just hanging out, enjoying some music.", "2024-04-19 10:25:00", 00006, 00007),
+(00015, "Pretty good, just finished a workout.", "2024-04-19 10:30:00", 00007, 00008),
+(00016, "Hey everyone! Let's plan a group outing this weekend.", "2024-04-19 10:35:00", 00008, 00009),
+(00017, "Sounds like a great idea! Count me in.", "2024-04-19 10:40:00", 00009, 00010),
+(00018, "I'm in too! Any suggestions on what to do?", "2024-04-19 10:45:00", 00010, 00011),
+(00019, "How about a picnic in the park?", "2024-04-19 10:50:00", 00011, 00012),
+(00020, "That sounds perfect! Let's do it.", "2024-04-19 10:55:00", 00012, 00013),
+(00021, "Great! I'll organize everything and send out details soon.", "2024-04-19 11:00:00", 00013, 00001);
 
 
 
