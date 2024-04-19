@@ -182,8 +182,8 @@ INSERT INTO chats (chat_id, message, timestamp, sender_id, recipient_id) VALUES
 (00017, "Sounds like a great idea! Count me in.", "2024-04-19 10:40:00", 00009, 00010),
 (00018, "I'm in too! Any suggestions on what to do?", "2024-04-19 10:45:00", 00010, 00011),
 (00019, "How about a picnic in the park?", "2024-04-19 10:50:00", 00011, 00012),
-(00020, "That sounds perfect! Let's do it.", "2024-04-19 10:55:00", 00012, 00013),
-(00021, "Great! I'll organize everything and send out details soon.", "2024-04-19 11:00:00", 00013, 00001);
+(00020, "That sounds perfect! Let's do it.", "2024-04-19 10:55:00", 00012, 00011),
+(00021, "Great! I'll organize everything and send out details soon.", "2024-04-19 11:00:00", 00012, 00001);
 
 
 
