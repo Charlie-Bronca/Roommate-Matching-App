@@ -3,7 +3,7 @@ CREATE DATABASE FlatBuddies;
 USE FlatBuddies;
 
 CREATE TABLE login(
-    user_id int(10) NOT NULL,
+    	user_id int(10) NOT NULL,
 	email varchar (50) NOT NULL,
 	password varchar (50) NOT NULL
 );
@@ -80,6 +80,11 @@ ALTER TABLE reviews
 ADD CONSTRAINT rev_pri
 PRIMARY KEY (review_id);
 
+
+-- ADD AUTO INCREMENT --
+ALTER TABLE login
+MODIFY user_id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+COMMIT;
 
 -- FOREIGN KEYS --
 ALTER TABLE preferences
