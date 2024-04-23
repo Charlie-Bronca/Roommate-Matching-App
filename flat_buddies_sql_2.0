@@ -10,34 +10,34 @@ CREATE TABLE login(
 
 CREATE TABLE users(
 	user_id int(10) NOT NULL,
-	first_name varchar (50) NOT NULL,
-	last_name varchar (50) NOT NULL,
-	dob date NOT NULL,
-	gender varchar(50) NOT NULL,
-	politics varchar(50) NOT NULL,
-	religion varchar(50) NOT NULL,
-	country varchar(50) NOT NULL,
-	job varchar(50) NOT NULL,
-	bio varchar(600) NOT NULL
+	first_name varchar (50),
+	last_name varchar (50),
+	dob date,
+	gender varchar(50),
+	politics varchar(50),
+	religion varchar(50),
+	country varchar(50),
+	job varchar(50),
+	bio varchar(600)
 );
 
 
 CREATE TABLE preferences(
 	user_id int(10) NOT NULL,
-	location varchar(50) NOT NULL,
-	p_age varchar(50) NOT NULL,
-	noise varchar(50) NOT NULL,
-	p_gender varchar(50) NOT NULL,
-	cleanliness varchar(200) NOT NULL,
-	smoking varchar(50) NOT NULL,
-	alcohol varchar(50) NOT NULL,
-	groceries varchar(50) NOT NULL,
-	schedule varchar(50) NOT NULL,
-	pets varchar(50) NOT NULL,
-	guests varchar(200) NOT NULL,
-	p_religion varchar(50) NOT NULL,
-	p_politics varchar(50) NOT NULL,
-	p_country varchar(50) NOT NULL
+	location varchar(50),
+	p_age varchar(50),
+	noise varchar(50),
+	p_gender varchar(50),
+	cleanliness varchar(200),
+	smoking varchar(50),
+	alcohol varchar(50),
+	groceries varchar(50),
+	schedule varchar(50),
+	pets varchar(50),
+	guests varchar(200),
+	p_religion varchar(50),
+	p_politics varchar(50),
+	p_country varchar(50)
 );
 	
 
