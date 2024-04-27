@@ -265,7 +265,7 @@ block content
           path(fill='currentColor', d='M11 16V7.85l-2.6 2.6L7 9l5-5l5 5l-1.4 1.45l-2.6-2.6V16zm-5 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z')
         |  Upload profile photo
     form.data-profile(action="/submit_profile", method="POST")
-      input(type='hidden' name='id' value=8)
+      input(type='hidden' name='id' value= user_id)
       // First Section: Personal Information
       .form-name
         .form-group
@@ -287,7 +287,7 @@ block content
             input.year(type='text', name='year', placeholder='YY')
         .form-group
           label(for='nationality') Nationality:
-          input#nationality.form-control(type='text', name='country', placeholder='')
+          input#nationality.form-control(type='text', name='nationality', placeholder='')
       // Third Section: Occupation
       .form-occupation
         .form-group
@@ -477,10 +477,10 @@ block content
         .general-preference-group
           label Would you prefer to live with people who practice the same religion as you?
           div
-            input#religion-yes(type='radio', name='religion', value='religion-yes')
+            input#religion-yes(type='radio', name='religion_pref', value='religion-yes')
             label.choice(for='religion-yes') Yes
           div
-            input#religion-nopreference(type='radio', name='religion', value='nopreference')
+            input#religion-nopreference(type='radio', name='religion_pref', value='nopreference')
             label.choice(for='religion-nopreference') No Preference
         // #8
         .general-preference-group

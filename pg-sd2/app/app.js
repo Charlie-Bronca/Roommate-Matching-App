@@ -12,8 +12,9 @@ app.set("views", "./app/views");
 app.use(express.static("static"));
 
 //Tanya originally had this commented out because we were not using it
-/*const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true }));*/
+//Hannan without the bodyparser my questionnaire form is not getting the data in body
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Code below can be used if we are not using an HTML form to submit
 //app.use(express.json());
@@ -23,12 +24,26 @@ const db = require("./services/db");
 
 //Get User Class
 const { User } = require("./models/user");
+const { User2 } = require("./models/user2");
+
+const { Profile } = require("./models/profile");
 
 //Get Chat Class
 const { Chat } = require("./models/chat");
 
 //Get Review Class
 const { Review } = require("./models/review");
+
+var session = require('express-session');
+app.use(session({
+  secret: 'secretkeysdfjsflyoifasd',
+  saveUninitialized: true,
+  resave: true,
+  rolling: true,
+  cookie: {
+    expires: 20 * 100000
+ }
+}));
 
 // Create a route for root - /
 app.get("/", function (req, res) {
@@ -56,12 +71,17 @@ app.get("/homepage", function (req, res) {
 });
 
 app.get("/questionnaire", function (req, res) {
-  res.render("questionnaire");
+  req.session.touch()
+  console.log("QUEST PAGE KNOWS",req.session.user_id)
+  user_id = req.session.user_id
+  res.render("questionnaire", {user_id:user_id});
 });
 
 app.get("/user_profile/:user_id", async function (req, res) {
+  req.session.touch()
   let user_id = req.params.user_id;
-  let user = new User(user_id);
+  //let user = new User(user_id);
+  let user = new Profile(user_id)
   /*
   await user.getFirstName();
   await user.getLastName();
@@ -72,7 +92,7 @@ app.get("/user_profile/:user_id", async function (req, res) {
   await user.getCountry();
   await user.getBio();
   */
-  await user.getUserDetails();
+  await user.getProfileDetails();
   await user.getPreferences();
   //await user.getAge();
   console.log(user);
@@ -81,6 +101,7 @@ app.get("/user_profile/:user_id", async function (req, res) {
 });
 
 //Data for chat, added for Sprint4
+/*
 app.get("/chat", async function (req, res) {
   const chatData = {
     chat_id: "chat1",
@@ -103,6 +124,7 @@ app.get("/chat", async function (req, res) {
 
   res.render("chat", { senderName, recipientName, chatData });
 });
+*/
 
 //HANNAN Questionnaire
 
@@ -133,39 +155,170 @@ app.get("/chat", async function (req, res) {
 
 // HANNAN QUESTIONNAIRE PAGE
 
+// error-message This page was not restored from back/forward cache because a content script from the extension with ID nkbihfbeogaeaoehlefnkodbefgpgknn received a message while the page was cached. This behavior will change shortly which may break the extension. If you are the developer of the extension, see https://developer.chrome.com/blog/bfcache-extension-messaging-changes.
+
+// app.post("/submit_profile", async function (req, res) {
+//   try {
+//     // Validate the submitted data
+//     const { first_name, last_name, dob, gender, religion, politics, bio, country, job } = console.Console.log( req.body);
+//     if (!first_name || !last_name || !dob || !gender || !religion || !politics || !bio || !country || !job) {
+//       throw new Error("Missing required fields");
+//     }
+
+//     // Create a new user instance with the submitted data
+//     const newUser = new User({
+//       first_name,
+//       last_name,
+//       dob,
+//       gender,
+//       religion,
+//       politics,
+//       bio,
+//       country,
+//       job
+//     });
+
+//     // Save the new user to the database
+//     const savedUser = await newUser.save();
+
+//     if (!savedUser) {
+//       throw new Error("Error saving user data");
+//     }
+
+//     res.status(200).send("User profile saved successfully");
+//   } catch (err) {
+//     console.error("Error creating profile:", err.message);
+//     res.status(500).send("Internal server error");
+//   }
+// });
+
+
+
 // ??? code
-/*app.post("/submit_profile", async function (req, res) {
-    try {
-    console.log("this is Body", req.body, "body end");
-        
+/*
+app.post("/submit_profile", async function (req, res) {
+  try {
+      console.log("Submitted Profile Data:", req.body); // Log the submitted profile data
+
       // Validate the submitted data
       const requiredFields = ['first_name', 'last_name', 'bio']; // Define required fields
       for (const field of requiredFields) {
-        if (!req.body[field]) {
-          throw new Error(`Missing required field: ${field}`);
-        }
+          if (!req.body[field]) {
+              throw new Error(`Missing required field: ${field}`);
+          }
       }
-  
+
       // Create a new user instance with the submitted data
-      const newUser = new User(req.body);
-  
-      // Save the new user to the database
-      const savedUser = await newUser.save();
-  
-      if (!savedUser) {
-        throw new Error("Error saving user data");
-      }
-  
+      const newUser = new User();
+
+      // Assign values to user instance properties
+      newUser.first_name = req.body.first_name;
+      newUser.last_name = req.body.last_name;
+      newUser.bio = req.body.bio;
+
+
       res.status(200).send("User profile saved successfully");
-    } catch (err) {
+  } catch (err) {
       console.error("Error creating profile:", err.message);
-      // res.status(500).send("Internal server error");
-      res.status(200).send("User profile saved successfully");
-    }
-  });*/
+      res.status(500).send("Internal server error");
+  }
+});
+*/
+
+
+app.post('/submit_profile', async function (req, res) {
+  params = req.body;
+  var user = new Profile(params.id);
+  console.log("FORM KNOWS ID:", params.id)
+  console.log(params)
+  //res.send('The user is', user);
+
+  try {
+    await user.addProfileDetails(params.first_name, params.last_name, params.dob, params.job, params.gender, params.religion, params.politics, params.bio, params.nationality, params.id);
+    res.send('form submitted');
+  }
+  catch (err) {
+    console.error(`Error while adding newuser `, err.message);
+  }
+  res.send('form submitted');
+
+});
+
+app.post('/send_chat', async function (req, res) {
+  params = req.body;
+  console.log(params.chat, params.recipient_id, params.sender_id, params.timestamp)
+  
+  try {
+    var sql = "INSERT INTO chats (message, sender_id, recipient_id, timestamp) VALUES (?, ? , ?, ?)";
+    const result = await db.query(sql, [params.chat, params.sender_id, params.recipient_id, params.timestamp]);
+    res.redirect("/chat/"+params.recipient_id);
+  }
+  catch (err) {
+    console.error(`Error while adding chat `, err.message);
+    res.send('error submitting');
+  }
+})
+
+app.post('/submit_review', async function (req, res) {
+
+  params = req.body;
+  console.log(params.review_text, params.user_id, params.date)
+  
+  try {
+    var sql = "INSERT INTO reviews (review, user_id, review_date) VALUES (?, ?, ?)";
+    const result = await db.query(sql, [params.review_text, params.user_id, params.date]);
+    req.session.touch()
+    res.redirect("/profiles");
+  }
+  catch (err) {
+    console.error(`Error while adding chat `, err.message);
+    res.send('error submitting');
+  }
+
+
+});
+
+  //var user = new Profile(params.id);
+  //console.log("FORM KNOWS ID:", params.id)
+  //console.log(params)
+  //res.send('The user is', user);
+  /*
+  try {
+    await user.addProfileDetails(params.first_name, params.last_name, params.dob, params.job, params.gender, params.religion, params.politics, params.bio, params.nationality, params.id);
+    res.send('form submitted');
+  }
+  catch (err) {
+    console.error(`Error while adding newuser `, err.message);
+  }
+  */
+  //res.send('form submitted');
+
+
 
   // Hannan Reviews Form Setup
 
+/*
+  app.post("/submit_review", async function (req, res) {
+    try {
+        console.log("Review Submitted:", req.body); // Log the submitted review data
+
+        // Validate the submitted data
+        const requiredFields = ['review-text']; // Define required fields
+        for (const field of requiredFields) {
+            if (!req.body[field]) {
+                throw new Error(`Missing required field: ${field}`);
+            }
+        }
+
+    
+
+        res.status(200).send("Review submitted successfully");
+    } catch (err) {
+        console.error("Error submitting review:", err.message);
+        res.status(500).send("Internal server error");
+    }
+});
+*/
 
   // Define the route for submitting reviews
 /*app.post("/submit_review", async function (req, res) {
@@ -212,25 +365,57 @@ function calculateAge(dob) {
 }*/
 
 app.get("/profiles", function (req, res) {
-  var sql = "select * from users";
-  db.query(sql).then((results) => {
+  req.session.touch()
+  console.log("PROFILES PAGE KNOWS",req.session.user_id)
+  user_id = req.session.user_id
+  var sql = "select * from users where user_id != ? && user_id <=12";
+  db.query(sql,[user_id]).then((results) => {
     // Send the results rows to the all-students template
     // The rows will be in a variable called data
     res.render("profiles", { data: results });
   });
 });
 
-app.get("/chat", function (req, res) {
-  res.render("chat");
+app.get("/chat/:user_id", async function (req, res) {
+  req.session.touch()
+  console.log("CHAT PAGE KNOWS",req.session.user_id)
+  user_id = req.session.user_id
+  //user_id = 1
+  let user = new Profile(user_id);
+  //let other_user_id = req.params.user_id;
+  let other_user = new Profile(req.params.user_id)
+  console.log(user_id, other_user.user_id)
+  //console.log(user.user_id, other_user.user_id)
+  await user.getProfileDetails();
+  //console.log(user)
+  await other_user.getProfileDetails();
+  //console.log(other_user)
+  chats = await user.getChatFromOtherProfile(other_user.user_id);
+  //console.log(chats)
+  res.render("chat", {user:user, other_user:other_user, chats:chats});
+  
 });
 
 app.get("/login", function (req, res) {
   res.render("login");
 });
 
+app.get('/register', function (req, res) {
+  res.render('register');
+});
+
+// Login
+app.get('/login_test', function (req, res) {
+  res.render('login_test');
+});
+
+app.get('/login_error', function (req, res) {
+  res.render('login_error');
+});
+
 app.get("/user_profile/test/:user_id", async function (req, res) {
   let user_id = req.params.user_id;
-  let user = new User(user_id);
+  let user = new Profile(user_id);
   /*
   await user.getFirstName();
   await user.getLastName();
@@ -241,7 +426,7 @@ app.get("/user_profile/test/:user_id", async function (req, res) {
   await user.getCountry();
   await user.getBio();
   */
-  await user.getUserDetails()
+  await user.getProfileDetails()
   await user.getPreferences();
   //await user.getAge();
   console.log(user);
@@ -253,8 +438,107 @@ app.get("/homepage_test", function (req, res) {
   res.render("homepage_test");
 });
 
-app.get("/chat_test", function (req, res) {
-  res.render("chat_test");
+app.get("/chat_list", async function(req, res) {
+  req.session.touch()
+  console.log("CHAT LIST PAGE KNOWS",req.session.user_id)
+  user_id = req.session.user_id
+  //user_id = 1
+  //res.render('chat_list');
+  let user = new Profile(user_id);
+  await user.getProfileDetails();
+  await user.getPreferences();
+  await user.getChatList();
+  console.log(user.chats)
+  const the_chats = user.chats
+  //the_chats.sort(function(a, b){return a.timestamp - b.timestamp});
+  //console.log(the_chats)
+  const people = []
+  const other_users = []
+  const other_users_chats = []
+  //console.log(user.user_id)
+  for(let i = 0; i < the_chats.length; i++){
+    //console.log(the_chats[i].sender_id, the_chats[i].recipient_id, user.user_id)
+    //console.log(the_chats[i].sender_id.valueOf(),(the_chats[i].sender_id.valueOf() in people))
+    /*
+    if (the_chats[i].sender_id.valueOf() != user.user_id.valueOf()){
+      console.log("This number is not the current user.")
+    }
+    if ((the_chats[i].sender_id.valueOf in people)==false){
+      console.log("This number is not in the list so far.", the_chats[i].sender_id.valueOf(), people.includes('2') )
+    }
+    */
+    
+    if ((the_chats[i].sender_id.valueOf() != user.user_id.valueOf())&&((people.includes(the_chats[i].sender_id.valueOf()))==false)){
+      let other_user = new Profile(the_chats[i].sender_id.valueOf())
+      await other_user.getProfileDetails();
+      other_chats = await user.getChatFromOtherProfile(other_user.user_id);
+      other_users.push({profile:other_user, chats:other_chats})
+      //other_users_chats.push(other_chats)
+      people.push(the_chats[i].sender_id.valueOf())
+      //console.log("ADDING: ",the_chats[i].sender_id.valueOf() )
+    }
+    if ((the_chats[i].recipient_id != user.user_id.valueOf())&&((people.includes(the_chats[i].recipient_id.valueOf()))==false)){
+      let other_user = new Profile(the_chats[i].recipient_id.valueOf())
+      await other_user.getProfileDetails();
+      other_chats = await user.getChatFromOtherProfile(other_user.user_id);
+      other_users.push({profile:other_user, chats:other_chats})
+      people.push(the_chats[i].recipient_id.valueOf())
+      //people.push(the_chats[i].recipient_id.valueOf())
+      //console.log("ADDING: ",the_chats[i].recipient_id.valueOf() )
+    }
+  }
+  console.log(other_users)
+
+  
+
+  res.render("chat_list", { user: user , other_users: other_users, other_users_chats });
+});
+
+app.get("/chat_list/:user_id", async function(req, res) {
+  let user_id = req.params.user_id;
+  let user = new Profile(user_id);
+  await user.getProfileDetails();
+  await user.getPreferences();
+  await user.getChatList();
+  console.log(user.chats)
+  const the_chats = user.chats
+  the_chats.sort(function(a, b){return a.timestamp - b.timestamp});
+  //console.log(the_chats)
+  const people = []
+  const other_users = []
+  //console.log(user.user_id)
+  for(let i = 0; i < the_chats.length; i++){
+    //console.log(the_chats[i].sender_id, the_chats[i].recipient_id, user.user_id)
+    //console.log(the_chats[i].sender_id.valueOf(),(the_chats[i].sender_id.valueOf() in people))
+    /*
+    if (the_chats[i].sender_id.valueOf() != user.user_id.valueOf()){
+      console.log("This number is not the current user.")
+    }
+    if ((the_chats[i].sender_id.valueOf in people)==false){
+      console.log("This number is not in the list so far.", the_chats[i].sender_id.valueOf(), people.includes('2') )
+    }
+    */
+    
+    if ((the_chats[i].sender_id.valueOf() != user.user_id.valueOf())&&((people.includes(the_chats[i].sender_id.valueOf()))==false)){
+      let other_user = new Profile(the_chats[i].sender_id.valueOf())
+      await other_user.getProfileDetails();
+      other_users.push(other_user)
+      people.push(the_chats[i].sender_id.valueOf())
+      //console.log("ADDING: ",the_chats[i].sender_id.valueOf() )
+    }
+    if ((the_chats[i].recipient_id != user.user_id.valueOf())&&((people.includes(the_chats[i].recipient_id.valueOf()))==false)){
+      let other_user = new Profile(the_chats[i].recipient_id.valueOf())
+      await other_user.getProfileDetails();
+      other_users.push(other_user)
+      people.push(the_chats[i].recipient_id.valueOf())
+      //people.push(the_chats[i].recipient_id.valueOf())
+      //console.log("ADDING: ",the_chats[i].recipient_id.valueOf() )
+    }
+    
+    
+  }
+  console.log(people)
+  res.render("chat_list", { user: user , other_users: other_users, the_chats:the_chats });
 });
 
 /*app.get("/reviews", async (req, res) => {
@@ -263,7 +547,10 @@ app.get("/chat_test", function (req, res) {
 });*/
 
 app.get("/reviews", function(req, res) {
-    res.render('reviews');
+    req.session.touch()
+    console.log("REVIEW PAGE KNOWS",req.session.user_id)
+    user_id = req.session.user_id
+    res.render('reviews',{user_id:user_id} );
 });
 
 //The line below is just incase we connect this to an HTML form
@@ -287,6 +574,64 @@ app.post('/add-bio', async function (req, res) {
        console.error(`Error while adding bio `, err.message);
    }
    res.send('form submitted');
+});
+
+
+app.post('/set-password', async function (req, res) {
+  params = req.body;
+  var user = new User2(params.email);
+  try {
+      uId = await user.getIdFromEmail();
+      if (uId) {
+          // If a valid, existing user is found, set the password and redirect to the users single-student page
+          await user.setUserPassword(params.password);
+          res.redirect('/login_test');
+          //console.log(req.session.user_id);
+          //res.send('Password set successfully');
+      }
+      else {
+          // If no existing user is found, add a new one
+          newId = await user.addUser(params.password);
+          res.send('/login_test');
+      }
+  } catch (err) {
+      console.error(`Error while adding password `, err.message);
+  }
+});
+
+app.post('/authenticate', async function (req, res) {
+  params = req.body;
+  var user = new User2(params.email);
+  try {
+      uId = await user.getIdFromEmail();
+      if (uId) {
+          match = await user.authenticate(params.password);
+          if (match) {
+              req.session.user_id = uId;
+              req.session.loggedIn = true;
+              // OPTIONAL: examine the session in the console
+              console.log("THIS IS THE SESSION",req.session.user_id);
+              //res.redirect('/user_profile/' + uId);
+              res.redirect("/profiles")
+          }
+          else {
+              // TODO improve the user journey here
+              //res.send('invalid password');
+              res.redirect('/login_error')
+          }
+      }
+      else {
+        res.redirect('/login_error')
+      }
+  } catch (err) {
+      console.error(`Error while comparing `, err.message);
+  }
+});
+
+// Logout
+app.get('/logout', function (req, res) {
+  req.session.destroy();
+  res.redirect('/login_test');
 });
 
 

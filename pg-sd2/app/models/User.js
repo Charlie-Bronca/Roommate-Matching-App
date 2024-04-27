@@ -1,4 +1,5 @@
 const db = require('../services/db');
+const { Chat } = require("./chat");
 
 class User{
     user_id;
@@ -12,6 +13,7 @@ class User{
     bio;
     country;
     preferences = {};
+    chats = [];
     age;
     // user_bio; //hannan
 
@@ -150,6 +152,32 @@ class User{
         //console.log("hey")
     }
 
+    async getChatList(){
+        var sql = "SELECT * from chats WHERE recipient_id = ? OR sender_id = ?"
+        const results = await db.query(sql, [this.user_id, this.user_id]);
+        const the_chats = []
+        for(let i = 0; i < results.length; i++){
+            let a_chat = new Chat (results[i].chat_id)
+            await a_chat.getChatDetails();
+            the_chats.push(a_chat)
+        }
+        this.chats = the_chats
+    }
+
+
+    async getIdFromEmail() {
+        var sql = "SELECT id FROM login WHERE Users.email = ?";
+        const result = await db.query(sql, [this.email]);
+        // TODO LOTS OF ERROR CHECKS HERE..
+        if (JSON.stringify(result) != '[]') {
+            this.id = result[0].id;
+            return this.id;
+        }
+        else {
+            return false;
+        }
+    }
+
     // async save() {
     //     const db = require('../services/db');
     //     try {
@@ -190,6 +218,30 @@ class User{
         }
     }
 
+    // async save() {
+    //     const db = require('../services/db');
+    //     try {
+    //         const sql = "INSERT INTO users (first_name, last_name, dob, gender, religion, politics, bio, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    //         const values = [
+    //             this.first_name,
+    //             this.last_name,
+    //             this.dob,
+    //             this.gender,
+    //             this.religion,
+    //             this.politics,
+    //             this.bio,
+    //             this.country
+    //         ];
+    //         await db.query(sql, values);
+    //         return true; // Return true indicating successful save
+    //     } catch (error) {
+    //         console.error("Error saving user:", error);
+    //         return false; // Return false indicating failure to save
+    //     }
+    // }
+    
+
+
     async addBio(bio) {
         var sql = "UPDATE users SET users.bio = ? WHERE users.user_id = ?"
         const result = await db.query(sql, [bio, this.user_id]);
@@ -197,9 +249,10 @@ class User{
         return result;
     }
 
-    async addUserDetails(first_name, last_name, dob, job, gender, religion, politics, bio, country){
+    async addUserDetails(first_name, last_name, dob, job, gender, religion, politics, bio, country, id){
         var sql = "UPDATE users SET first_name = ? , last_name = ? , dob = ? , job = ? , gender = ? , religion = ? , politics = ? , bio = ?, country = ? WHERE user_id = ?"
-        const result = await db.query(sql, [first_name, last_name, dob, job, gender, religion, politics, bio, country, this.user_id]);
+        //var sql = "INSERT INTO users(user_id, first_name, last_name, dob, job, gender, religion, politics, bio, country) VALUES (?,?,?,?,?,?,?,?,?,?)"
+        const result = await db.query(sql, [first_name, last_name, dob, job, gender, religion, politics, bio, country,id ]);
         this.first_name = first_name
         this.last_name = last_name
         this.dob = new Date(dob);

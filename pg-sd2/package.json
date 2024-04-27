@@ -10,11 +10,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "dotenv": "^10.0.0",
+<<<<<<< HEAD
     "express": "^4.19.2",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.4",
+=======
+    "express": "^4.18.3",
+    "express-session": "^1.18.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.9.6",
+>>>>>>> 93b568aabcfaeba6ec6fae45c6d278a724887d65
     "pug": "^3.0.2",
     "sqlite3": "^5.0.2",
     "supervisor": "^0.12.0"
