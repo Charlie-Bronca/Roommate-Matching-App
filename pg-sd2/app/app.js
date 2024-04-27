@@ -257,9 +257,26 @@ app.post('/send_chat', async function (req, res) {
     console.error(`Error while adding chat `, err.message);
     res.send('error submitting');
   }
+})
+
+app.post('/submit_review', async function (req, res) {
+
+  params = req.body;
+  console.log(params.review_text, params.user_id, params.date)
   
-  
-  
+  try {
+    var sql = "INSERT INTO reviews (review, user_id, review_date) VALUES (?, ?, ?)";
+    const result = await db.query(sql, [params.review_text, params.user_id, params.date]);
+    req.session.touch()
+    res.redirect("/profiles");
+  }
+  catch (err) {
+    console.error(`Error while adding chat `, err.message);
+    res.send('error submitting');
+  }
+
+
+});
 
   //var user = new Profile(params.id);
   //console.log("FORM KNOWS ID:", params.id)
@@ -276,7 +293,7 @@ app.post('/send_chat', async function (req, res) {
   */
   //res.send('form submitted');
 
-});
+
 
   // Hannan Reviews Form Setup
 
@@ -531,7 +548,9 @@ app.get("/chat_list/:user_id", async function(req, res) {
 
 app.get("/reviews", function(req, res) {
     req.session.touch()
-    res.render('reviews');
+    console.log("REVIEW PAGE KNOWS",req.session.user_id)
+    user_id = req.session.user_id
+    res.render('reviews',{user_id:user_id} );
 });
 
 //The line below is just incase we connect this to an HTML form
