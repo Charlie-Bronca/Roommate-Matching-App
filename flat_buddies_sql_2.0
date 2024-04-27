@@ -53,8 +53,7 @@ CREATE TABLE reviews(
 	review_id int(10) NOT NULL,
 	review varchar(350) NOT NULL, 
 	review_date date NOT NULL, 
-	user_id int(10) NOT NULL,
-	stars int(10)
+	user_id int(10) NOT NULL
 );
 
 
