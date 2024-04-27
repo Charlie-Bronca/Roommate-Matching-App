@@ -61,7 +61,7 @@ html(lang='en')
       height: auto;
       background-color: #F2E9E2;
       }
-      .lukecel {
+      .photocel {
       margin-top: 10%;
       margin-left: 10%;
       width: 20%;
@@ -113,12 +113,12 @@ html(lang='en')
       .triangle {
       position: relative;
       margin-top: 5%;
-      width: 95%;
+      width: 100%;
       height: auto;
       z-index: 0;
       }
       .tricont {
-      height: 50%;
+      height: auto;
       width: auto;
       position: relative;
       }
@@ -240,15 +240,15 @@ html(lang='en')
     |    
     .tophalf
       .content
-        .lukecel
+        .photocel
           .picturemask
             img.picture(src='/images/45324.png', alt="Luke's profile picture")
           |                
           img.profile(src='/images/Luke-Example.png', alt="Luke's profile")
         |            
-        .lukecel
+        .photocel
           .picturemask
-            img.picture(src='/images/23436.png', alt="Luke's profile picture", width='auto', height='100%')
+            img.picture(src='/images/23436.png', alt="Celine's profile picture", width='auto', height='100%')
           |                
           img.profile(src='/images/Celine-Example.png', alt="Celine's profile")
         |            
@@ -268,11 +268,23 @@ html(lang='en')
     p.saying What users are saying...
     |    
     .reviews
-      img.boxes(src='Blair.png', alt="Blair's review")
-      |        
-      img.boxes(src='James.png', alt="James' review")
-      |        
-      img.boxes(src='Blessing.png', alt="Blessing's review")
+      .photocel
+          .picturemask
+            img.picture(src='/images/blair.png', alt="Blair's profile picture", width='auto', height='100%')
+          |                
+          img.profile(src='/images/blair.png', alt="Blair's profile")  
+
+      .photocel
+        .picturemask
+          img.picture(src='/images/james.png', alt="James's profile picture", width='auto', height='100%')
+        |                
+        img.profile(src='/images/james.png', alt="James's profile")
+
+      .photocel
+        .picturemask
+          img.picture(src='/images/blessing.png', alt="Blessing's profile picture", width='auto', height='100%')
+        |                
+        img.profile(src='/images/blessing.png', alt="Blessing's profile")
     |    
     footer
       .footer-container
