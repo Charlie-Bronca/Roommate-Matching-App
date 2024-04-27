@@ -7,14 +7,28 @@ class Chat {
     timestamp;
     message;
 
-    constructor(chat_id, sender_id, recipient_id, timestamp, message) {
+    constructor(chat_id) {
         this.chat_id = chat_id;
-        this.sender_id = sender_id;
-        this.recipient_id = recipient_id;
-        this.timestamp = timestamp;
-        this.message = message;
+        //this.sender_id = sender_id;
+        //this.recipient_id = recipient_id;
+        //this.timestamp = timestamp;
+        //this.message = message;
       }
 
+    async getChatDetails() {
+        if (typeof this.message !== 'string') {
+            const sql = 'SELECT * FROM chats WHERE chat_id = ?';
+            const results = await db.query(sql, [this.chat_id]);
+            this.sender_id = results[0].sender_id
+            this.recipient_id = results[0].recipient_id
+            this.timestamp = results[0].timestamp
+            this.message = results[0].message
+        }
+    }
+
+
+
+    /*
     async getSenderName() {
         if (!this.senderName) {
             const sender = await this.fetchUserById(this.sender_id);
@@ -50,7 +64,9 @@ class Chat {
         const result = await db.query(sql, [chat_id]);
         return result[0]; 
     }
+    */
 }
+
 
 module.exports = {
     Chat
