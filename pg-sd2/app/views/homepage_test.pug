@@ -152,17 +152,40 @@ html(lang='en')
       }
       .reviews {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      justify-content: space-evenly ;
       flex-wrap: wrap;
       padding: 5%;
       }
       .boxes{
+      width: calc(33% - 6vw);
       margin: 3vw;
       border: solid;
       border-width: 0.75px;
       border-radius: 30px;
       border-color: black;
+      }
+      .blueBanner  {
+        background: #859EBC;
+        overflow: hidden;
+        border: solid;
+        border-width: 0.75px;
+        border-radius: 30px;
+        border-color: black;
+      }
+      .nameText {
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+      }
+      .photomask {
+      border-radius: 50%;
+      width: 6vw;
+      height: 6vw;
+      display: flex;
+      position: absolute;
+      top: -8%;
+      left: 130%;
+      overflow: hidden;
       }
       footer {
       color: #000000;
@@ -269,18 +292,29 @@ html(lang='en')
     p.saying What users are saying...
     |    
     .reviews
-      .photocel
-          .picturemask
+      .boxes 
+        .photocel
+          .photomask
             img.picture(src='static/images/00005.png', alt="Blair's profile picture", width='auto', height='100%')
+        .blueBanner
+          .nameText
+            p Blair
 
-      .photocel
-        .picturemask
-          img.picture(src='static/images/00011.png', alt="James's profile picture", width='auto', height='100%')
+      .boxes
+        .photocel
+          .photomask
+            img.picture(src='static/images/00011.png', alt="James's profile picture", width='auto', height='100%')
+        .blueBanner
+          .nameText
+            p James
 
-      .photocel
-        .picturemask
-          img.picture(src='static/images/00010.png', alt="Blessing's profile picture", width='auto', height='100%')
-    |    
+      .boxes
+        .photocel
+          .photomask
+            img.picture(src='static/images/00010.png', alt="Blessing's profile picture", width='auto', height='100%')
+        .blueBanner
+          .nameText
+            p Blessing
 
     footer
       .footer-container
