@@ -1,13 +1,77 @@
-extends header
-block head
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title Register
-block content
-    h1 Register here
-    form(action='/set-password' method='POST')
-        label(for='email') Email: 
-        input(name='email') 
-        label(for='password') Password: 
-        input(name='password' type = 'password')
-        label(for='confirm') Confirm password: 
-        input(name='password' type = 'password')
-        input(type='submit' value='Create your account')
+    style.
+      body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Ensures the body covers the entire viewport height */
+      margin: 0; /* Remove default margin */
+      flex-direction: column; /* Ensure elements are stacked vertically */
+      }
+      .header {
+      font-weight: bold;
+      font-size: 20px;
+      font-family: sans-serif;
+      margin-bottom: 30px; /* Add some bottom margin */
+      order: -1; /* Move the <p> element above the form */
+      }
+      form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      }
+      label {
+      display: inline-block; /* Change display to inline-block */
+      width: 250px;
+      margin-bottom: 10px;
+      font-family: sans-serif;
+      font-size: 13px;
+      }
+      input {
+      width: 250px;
+      height: 25px;
+      margin-bottom: 20px;
+      border: solid 0.5px;
+      border-radius: 5px;
+      }
+      button {
+      width: 250px;
+      height: 30px;
+      background-color: rgba(254, 105, 65, 0.75); /* RGBA color with 75% opacity */
+      border: solid 0.5px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      }
+      .terms {
+      font-size: 12px;
+      width: 225px;
+      font-family: sans-serif;
+      }
+      .blue-text {
+      color: #106BD5;
+      text-decoration: none;
+      }
+      .blue-text:hover {
+      text-decoration: underline; /* Add underline on hover */
+      }
+  body
+    p.header Create your account
+    form(action='/set-password', method='POST')
+      label(for='email') Email
+      input(type='text', name='email')
+      label(for='password') Password
+      input(type='password', name='password')
+      label(for='confirm') Confirm password
+      input(type='password', name='password')
+      button Create your account
+    p.terms
+      | By creating your account you agree to our 
+      span.blue-text Terms and Service and Privacy Policy
+      | .
