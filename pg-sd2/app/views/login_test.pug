@@ -1,0 +1,107 @@
+extends header
+block head
+    title Login
+    | 
+    style.
+      .box{
+        margin: 3vw;
+        width: 30%;
+        height: 80%;
+        align-items: center;
+        justify-content: center;
+        margin-left: 35%;
+        text-align: center;
+        border: solid;
+        border-width: 0.1vw;
+        border-radius: 3vw;
+        border-color: black;
+      }
+      .register{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 10%;
+        font-size: 1vw;
+      }
+      .form{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.2vw;
+        display: flex;
+        flex-direction: column;
+        gap: 5vh;
+        margin-top: 8vh;
+      }
+      .enter{
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        width: 75%;
+        margin-left: 13%;
+      }
+      .enterbox{
+        height: 5vh;
+        border-radius: 1vh;
+      }
+      .submit{
+        width: 75%;
+        font-size: 1.2vw;
+        background-color: rgba(254, 105, 65, 0.75);
+        border-radius: 1vh;
+        height: 5vh;
+        cursor: pointer;
+        text-decoration: none;
+        margin-left: 13%;
+      }
+      .submit:hover{
+        background-color: #FE6941;
+        box-shadow: inset 0px 5px 5px -5px rgba(0,0,0,0.75);
+        text-decoration: none;
+      }
+      .text1{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 2vw;
+        margin-top: 3vw;
+      }
+
+      .text2{
+        font-family: Arial, Helvetica, sans-serif;
+        padding-left: 4vw;
+        padding-right: 4vw;
+        font-size: 0.8vw;
+      }
+      .close{
+        text-decoration: none;
+        font-family: Arial, Helvetica, sans-serif;
+        color: black;
+        position: relative;
+        top: 2%;
+        left: 43%;
+        font-size: 1.2vw;
+      }
+      
+      .space{
+        margin-right: 1%;
+      }
+block content
+    .box
+        a.close(href='/homepage') X
+        |                           
+        h1.text1 Login here
+        form.form(action='/authenticate' method='POST')
+            div.enter 
+                label(for='email') Enter your email: 
+                input.enterbox(name='email')
+            div.enter
+                label(for='email') Enter your password: 
+                input.enterbox(name='password' type = 'password')
+            input.submit(type='submit' value='Login')
+        |
+        p.text2
+            | By tapping Log In, you agree to our Terms. Learn how we process your data in our Privacy Policy, and Cookie Policy.             
+        .register
+            p.space Don&apos;t have an account yet?
+            |                    
+            a(href='/questionnaire') Register
+            
