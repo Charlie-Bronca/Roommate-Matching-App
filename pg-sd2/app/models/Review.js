@@ -19,14 +19,15 @@ class Review{
         return result[0]; 
     }
     */
-
+    static async getReviewById(reviewId) {
+        const sql = "SELECT * FROM reviews WHERE review_id = ?";
+        const results = await db.query(sql, [reviewId]);
+        return results.length ? results[0] : null;
+    }
+    
     async getReviewDetails() {
         if (typeof this.review !== 'string') {
-<<<<<<< HEAD
-            var sql = "SELECT review from reviews WHERE review_id = ?"
-=======
             var sql = "SELECT * from reviews WHERE review_id = ?"
->>>>>>> origin/main
             const results = await db.query(sql, [this.review_id]);
             this.review = results[0].review;
             this.user_id = results[0].user_id;
@@ -34,6 +35,13 @@ class Review{
 
         }
     }
+
+    static async findByUserId(user_id) {
+        const sql = "SELECT * FROM reviews WHERE user_id = ?";
+        const results = await db.query(sql, [user_id]);
+        return results; // Return an array of reviews for the given user ID
+    }
+}
 
     /*
     async getDate() {
@@ -52,7 +60,6 @@ class Review{
         return result;
     }
     */
-}
 
 module.exports = {
     Review
