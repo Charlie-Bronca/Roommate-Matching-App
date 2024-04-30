@@ -137,6 +137,12 @@ class Profile{
         this.age = this.calcAge(this.dob)
         return result;
     }
+
+    async addPreferences(location, p_age, noise, p_gender, cleanliness, smoking, alcohol, groceries, schedule, pets, guests, p_religion, p_politics, p_country, id){
+        var sql = "UPDATE preferences SET location=?, p_age=?, noise=?, p_gender=?, cleanliness=?, smoking=?, alcohol=?, groceries=?, schedule=?, pets=?, guests=?, p_religion=?, p_politics=?, p_country=? WHERE user_id = ?"
+        const result = await db.query(sql, [location, p_age, noise, p_gender, cleanliness, smoking, alcohol, groceries, schedule, pets, guests, p_religion, p_politics, p_country, id]);
+        return result;
+    }
     
 
 }

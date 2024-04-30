@@ -47,14 +47,7 @@ app.use(session({
 
 // Create a route for root - /
 app.get("/", function (req, res) {
-  // Set up an array of data
-  var test_data = ["one", "two", "three", "four"];
-  // Send the array through to the template as a variable called data
-  res.render("index", {
-    title: "My index page",
-    heading: "My heading",
-    data: test_data,
-  });
+  res.render("homepage");
 });
 
 app.get("/flat_buddies_test", function (req, res) {
@@ -235,12 +228,14 @@ app.post('/submit_profile', async function (req, res) {
 
   try {
     await user.addProfileDetails(params.first_name, params.last_name, params.dob, params.job, params.gender, params.religion, params.politics, params.bio, params.nationality, params.id);
-    res.send('form submitted');
+    console.log(params.location, params.age, params.noise, params['gender preference'], params['cleaning-style'],params.smoking, params.Alcohol, params.grocery,params['work-schedule'],params.pets, params['guest-policy'], params.religion_pref, params.politics_pref,params.country,params.id)
+    await user.addPreferences(params.location, params.age, params.noise, params['gender preference'], params['cleaning-style'],params.smoking, params.Alcohol, params.grocery,params['work-schedule'],params.pets, params['guest-policy'], params.religion_pref, params.politics_pref,params.country,params.id )
+    res.redirect("/profiles");
   }
   catch (err) {
     console.error(`Error while adding newuser `, err.message);
   }
-  res.send('form submitted');
+  res.redirect("/questionnaire");
 
 });
 
