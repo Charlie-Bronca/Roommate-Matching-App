@@ -447,7 +447,7 @@ block content
         .general-preference-group
           label Would you like to share the grocery with your flatmates?
           div
-            input#grocery-yes(type='radio', name='grocery', value='')Yes
+            input#grocery-yes(type='radio', name='grocery', value='Yes')
             label.choice(for='grocery-yes') Yes
           div
             input#grocery-no(type='radio', name='grocery', value='No')
@@ -468,10 +468,10 @@ block content
         .general-preference-group
           label Would you prefer to live with people who share the same political beliefs as you?
           div
-            input#politics-yes(type='radio', name='politics', value='Yes')
+            input#politics-yes(type='radio', name='politics_pref', value='Yes')
             label.choice(for='politics-yes') Yes
           div
-            input#politics-nopreference(type='radio', name='politics', value='No Preference')
+            input#politics-nopreference(type='radio', name='politics_pref', value='No Preference')
             label.choice(for='politics-nopreference') No Preference
         // #7
         .general-preference-group
@@ -519,7 +519,7 @@ block content
             input#clean-3(type='radio', name='cleaning-style', value='I am organised, but I would like to hire someone to do the cleaning')
             label.choice(for='clean-3') I am organised, but I would like to hire someone to do the cleaning
           div
-            input#clean-4(type='radio', name='cleaning-style', value='I don't mind it being unorganised and I would like to hire a cleaner')
+            input#clean-4(type='radio', name='cleaning-style', value= 'I do not mind it being unorganised and I would like to hire a cleaner')
             label.choice(for='clean-4') I don't mind it being unorganised and I would like to hire a cleaner
           div
             input#clean-5(type='radio', name='cleaning-style', value='A messy space does not bother me')
