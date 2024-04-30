@@ -275,13 +275,13 @@ html(lang='en')
       .content
         .photocel
           .picturemask
-            img.picture(src='/images/45324.png', alt="Luke's profile picture")
+            img.picture(src='/images/00012.png', alt="Luke's profile picture")
           |                
           img.profile(src='/images/Luke-Example.png', alt="Luke's profile")
         |            
         .photocel
           .picturemask
-            img.picture(src='/images/23436.png', alt="Celine's profile picture", width='auto', height='100%')
+            img.picture(src='/images/00004.png', alt="Celine's profile picture", width='auto', height='100%')
           |                
           img.profile(src='/images/Celine-Example.png', alt="Celine's profile")
         |            
@@ -307,7 +307,9 @@ html(lang='en')
             p= review.review 
               .photocel
                 .photomask
-                  img.picture(src='static/images/${review.user_id}.png', alt="${review.name}'s profile picture", width='auto', height='100%')
+                  - const pic_num = String(review.userId).padStart(5, '0');
+                  - console.log(review)
+                  img.picture(src="/images/"+pic_num+".png", alt="Profile picture", width='auto', height='100%')
               .blueBanner
                 p.nameText= review.name
 
