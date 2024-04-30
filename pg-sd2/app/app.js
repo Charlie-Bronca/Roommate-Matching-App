@@ -59,9 +59,51 @@ app.get("/flat_buddies_test", function (req, res) {
   });
 });
 
-app.get("/homepage", function (req, res) {
-  res.render("homepage");
+/*app.get("/homepage_test", function (req, res) {
+  res.render("homepage_test");
+});*/
+
+app.get('/homepage', async (req, res) => {
+  const reviewIds = ['2', '4', '3'];
+
+  const reviewsData = [];
+
+  // Fetch review details and associated user details
+  for (const reviewId of reviewIds) {
+    const review = await Review.getReviewById(reviewId);
+    if (review) {
+      const userId = review.user_id;
+      const userProfile = new Profile(userId);
+      await userProfile.getProfileDetails();
+
+      reviewsData.push({
+        name: userProfile.first_name + ' ' + userProfile.last_name,
+        review: review.review
+      });
+    }
+  }
+
+  res.render('homepage', { reviews: reviewsData });
 });
+
+
+
+
+/*app.get("/homepage_test", async function (req, res) {
+  const review1 = await Review.getReviewDetails({ id: 5 });
+  const review2 = await Review.getReviewDetails({ id: 11 });
+  const review3 = await Review.getReviewDetails({ id: 10 });
+  let review_id = req.query.review_id;
+  let review1 = new Review (review_id);
+  let review2 = new Review (review_id);
+  let review3 = new Review (review_id);
+
+  await review1.getReviewId([1]);
+  await review2.getReviewId([3]);
+  await review3.getReviewId([2]);
+  
+  res.render("homepage_test", {review1, review2, review3});
+});*/
 
 app.get("/questionnaire", function (req, res) {
   req.session.touch()

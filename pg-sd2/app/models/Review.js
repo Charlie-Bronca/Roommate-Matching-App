@@ -1,5 +1,4 @@
 const db = require('../services/db');
-
 class Review{
     review_id;
     review;
@@ -20,7 +19,12 @@ class Review{
         return result[0]; 
     }
     */
-
+    static async getReviewById(reviewId) {
+        const sql = "SELECT * FROM reviews WHERE review_id = ?";
+        const results = await db.query(sql, [reviewId]);
+        return results.length ? results[0] : null;
+    }
+    
     async getReviewDetails() {
         if (typeof this.review !== 'string') {
             var sql = "SELECT * from reviews WHERE review_id = ?"
@@ -32,13 +36,20 @@ class Review{
         }
     }
 
+    static async findByUserId(user_id) {
+        const sql = "SELECT * FROM reviews WHERE user_id = ?";
+        const results = await db.query(sql, [user_id]);
+        return results; // Return an array of reviews for the given user ID
+    }
+}
+
     /*
     async getDate() {
         return this.date;
     }
 
     static async getReviewId(review_id) {
-        const sql = 'SELECT * FROM chats WHERE review_id = ?';
+        const sql = 'SELECT review FROM reviews WHERE review_id = ?';
         const result = await db.query(sql, [review_id]);
         return result[0]; 
     }
@@ -49,7 +60,6 @@ class Review{
         return result;
     }
     */
-}
 
 module.exports = {
     Review
