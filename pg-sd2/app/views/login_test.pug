@@ -1,5 +1,6 @@
-extends header
-block head
+doctype html
+html(lang='en')
+  head
     title Login
     | 
     style.
@@ -84,7 +85,11 @@ block head
       .space{
         margin-right: 1%;
       }
-block content
+      .logo {
+          width:100px;
+      }
+  body
+    img.logo(src='/logo/FlatBuddies logo2.png', alt='no logo')
     .box
         a.close(href='/homepage') X
         |                           
@@ -103,5 +108,5 @@ block content
         .register
             p.space Don&apos;t have an account yet?
             |                    
-            a(href='/questionnaire') Register
+            a(href='/register') Register
             
