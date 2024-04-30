@@ -61,7 +61,7 @@ html(lang='en')
       height: auto;
       background-color: #F2E9E2;
       }
-      .lukecel {
+      .photocel {
       margin-top: 10%;
       margin-left: 10%;
       width: 20%;
@@ -113,12 +113,12 @@ html(lang='en')
       .triangle {
       position: relative;
       margin-top: 5%;
-      width: 95%;
+      width: 100%;
       height: auto;
       z-index: 0;
       }
       .tricont {
-      height: 50%;
+      height: auto;
       width: auto;
       position: relative;
       }
@@ -152,16 +152,49 @@ html(lang='en')
       }
       .reviews {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      justify-content: space-evenly ;
       flex-wrap: wrap;
+      padding: 5%;
       }
       .boxes{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      width: calc(33% - 6vw);
       margin: 3vw;
       border: solid;
       border-width: 0.75px;
       border-radius: 30px;
       border-color: black;
+      }
+      .reviewText{
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.5vw;
+      margin: 10%;
+      }
+      .blueBanner  {
+      background: #859EBC;
+      overflow: hidden;
+      border: solid;
+      border-width: 0.75px;
+      border-radius: 30px;
+      border-color: black;
+      }
+      .nameText {
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+      }
+      .photomask {
+      border-radius: 50%;
+      width: 6vw;
+      height: 6vw;
+      display: flex;
+      position: relative;
+      left: 130%;
+      overflow: hidden;
       }
       footer {
       color: #000000;
@@ -240,15 +273,15 @@ html(lang='en')
     |    
     .tophalf
       .content
-        .lukecel
+        .photocel
           .picturemask
             img.picture(src='/images/45324.png', alt="Luke's profile picture")
           |                
           img.profile(src='/images/Luke-Example.png', alt="Luke's profile")
         |            
-        .lukecel
+        .photocel
           .picturemask
-            img.picture(src='/images/23436.png', alt="Luke's profile picture", width='auto', height='100%')
+            img.picture(src='/images/23436.png', alt="Celine's profile picture", width='auto', height='100%')
           |                
           img.profile(src='/images/Celine-Example.png', alt="Celine's profile")
         |            
@@ -268,12 +301,32 @@ html(lang='en')
     p.saying What users are saying...
     |    
     .reviews
-      img.boxes(src='Blair.png', alt="Blair's review")
-      |        
-      img.boxes(src='James.png', alt="James' review")
-      |        
-      img.boxes(src='Blessing.png', alt="Blessing's review")
-    |    
+      each review in reviews
+        .boxes
+          .reviewText
+            p= review.review 
+              .photocel
+                .photomask
+                  img.picture(src='static/images/${review.user_id}.png', alt="${review.name}'s profile picture", width='auto', height='100%')
+              .blueBanner
+                p.nameText= review.name
+
+        //.boxes
+          .photocel
+            .photomask
+              img.picture(src='static/images/00011.png', alt="James's profile picture", width='auto', height='100%')
+          .blueBanner
+            .nameText
+              p James
+
+        //.boxes
+          .photocel
+            .photomask
+              img.picture(src='static/images/00010.png', alt="Blessing's profile picture", width='auto', height='100%')
+          .blueBanner
+            .nameText
+              p Blessing
+
     footer
       .footer-container
         .footer-section
