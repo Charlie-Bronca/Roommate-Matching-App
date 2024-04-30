@@ -65,7 +65,6 @@ app.get("/flat_buddies_test", function (req, res) {
 
 app.get('/homepage', async (req, res) => {
   const reviewIds = ['2', '4', '3'];
-
   const reviewsData = [];
 
   // Fetch review details and associated user details
@@ -78,11 +77,12 @@ app.get('/homepage', async (req, res) => {
 
       reviewsData.push({
         name: userProfile.first_name + ' ' + userProfile.last_name,
-        review: review.review
+        review: review.review,
+        userId: userId
       });
     }
   }
-
+  console.log('Review data:', reviewsData);
   res.render('homepage', { reviews: reviewsData });
 });
 
