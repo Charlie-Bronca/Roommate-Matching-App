@@ -40,14 +40,18 @@ app.use(session({
   saveUninitialized: true,
   resave: true,
   rolling: true,
-  cookie: {
-    expires: 20 * 100000
- }
+  cookie: { 
+    secure: false,
+    maxAge: 3600000,
+    expires: new Date(Date.now() + 3600000),
+    saveUninitialized: true
+    },
+  saveUninitialized: true,
 }));
 
 // Create a route for root - /
 app.get("/", function (req, res) {
-  res.render("homepage");
+  res.redirect("/homepage");
 });
 
 app.get("/flat_buddies_test", function (req, res) {
@@ -167,6 +171,7 @@ app.get("/chat", async function (req, res) {
 
 
 app.post('/submit_profile', async function (req, res) {
+  req.session.touch()
   params = req.body;
   var user = new Profile(params.id);
   console.log("FORM KNOWS ID:", params.id)
@@ -174,19 +179,21 @@ app.post('/submit_profile', async function (req, res) {
   //res.send('The user is', user);
 
   try {
-    await user.addProfileDetails(params.first_name, params.last_name, params.dob, params.job, params.gender, params.religion, params.politics, params.bio, params.nationality, params.id);
+    const result = await user.addProfileDetails(params.first_name, params.last_name, params.dob, params.job, params.gender, params.religion, params.politics, params.bio, params.nationality, params.id);
     console.log(params.location, params.age, params.noise, params['gender preference'], params['cleaning-style'],params.smoking, params.Alcohol, params.grocery,params['work-schedule'],params.pets, params['guest-policy'], params.religion_pref, params.politics_pref,params.country,params.id)
-    await user.addPreferences(params.location, params.age, params.noise, params['gender preference'], params['cleaning-style'],params.smoking, params.Alcohol, params.grocery,params['work-schedule'],params.pets, params['guest-policy'], params.religion_pref, params.politics_pref,params.country,params.id )
-    res.redirect("/profiles");
+    const result2 = await user.addPreferences(params.location, params.age, params.noise, params['gender preference'], params['cleaning-style'],params.smoking, params.Alcohol, params.grocery,params['work-schedule'],params.pets, params['guest-policy'], params.religion_pref, params.politics_pref,params.country,params.id )
+    req.session.touch()
+    return res.redirect("/questionnaire");
   }
   catch (err) {
-    console.error(`Error while adding newuser `, err.message);
+    return console.error(`Error while adding newuser `, err.message);
   }
-  res.redirect("/questionnaire");
+  //res.redirect("/questionnaire");
 
 });
 
 app.post('/send_chat', async function (req, res) {
+  req.session.touch()
   params = req.body;
   console.log(params.chat, params.recipient_id, params.sender_id, params.timestamp)
   
@@ -202,7 +209,7 @@ app.post('/send_chat', async function (req, res) {
 })
 
 app.post('/submit_review', async function (req, res) {
-
+  req.session.touch()
   params = req.body;
   console.log(params.review_text, params.user_id, params.date)
   
@@ -372,6 +379,7 @@ app.get("/chat_list", async function(req, res) {
 });
 
 app.get("/chat_list/:user_id", async function(req, res) {
+  req.session.touch()
   let user_id = req.params.user_id;
   let user = new Profile(user_id);
   await user.getProfileDetails();
