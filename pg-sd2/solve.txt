@@ -1,0 +1,37 @@
+if we want to save the review form to database we need a database -- we already have it.
+Within the route handler, i have to replace the console.log code To save(). "the review data to your database using the defined model".(this line is for me only) 
+
+what i understand but its not working --
+
+1- First i have to import the review Model :
+const Review = require('./models/review'); // Import your review model
+
+2- Then we have to replace the console.log method to save() using the code:
+
+app.post("/submit_review", async function (req, res) {
+    try {
+        // Extract relevant data from the request body
+        const reviewData = {
+            text: req.body['review-text'],
+            // Add other fields as needed
+        };
+
+        // Create a new review instance with the submitted data
+        const newReview = new Review(reviewData);
+
+        // Save the new review to the database
+        const savedReview = await newReview.save();
+
+        // Check if the review was successfully saved
+        if (!savedReview) {
+            throw new Error("Error saving review data");
+        }
+
+        // Send a response back to the client indicating success
+        res.status(200).send("Review submitted successfully");
+    } catch (err) {
+        // Handle errors
+        console.error("Error submitting review:", err.message);
+        res.status(500).send("Internal server error");
+    }
+});
