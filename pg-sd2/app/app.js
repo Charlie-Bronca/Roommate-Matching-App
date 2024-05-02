@@ -47,14 +47,7 @@ app.use(session({
 
 // Create a route for root - /
 app.get("/", function (req, res) {
-  // Set up an array of data
-  var test_data = ["one", "two", "three", "four"];
-  // Send the array through to the template as a variable called data
-  res.render("index", {
-    title: "My index page",
-    heading: "My heading",
-    data: test_data,
-  });
+  res.render("homepage");
 });
 
 app.get("/flat_buddies_test", function (req, res) {
@@ -66,9 +59,51 @@ app.get("/flat_buddies_test", function (req, res) {
   });
 });
 
-app.get("/homepage", function (req, res) {
-  res.render("homepage");
+/*app.get("/homepage_test", function (req, res) {
+  res.render("homepage_test");
+});*/
+
+app.get('/homepage', async (req, res) => {
+  const reviewIds = ['2', '4', '3'];
+  const reviewsData = [];
+
+  // Fetch review details and associated user details
+  for (const reviewId of reviewIds) {
+    const review = await Review.getReviewById(reviewId);
+    if (review) {
+      const userId = review.user_id;
+      const userProfile = new Profile(userId);
+      await userProfile.getProfileDetails();
+
+      reviewsData.push({
+        name: userProfile.first_name + ' ' + userProfile.last_name,
+        review: review.review,
+        userId: userId
+      });
+    }
+  }
+  console.log('Review data:', reviewsData);
+  res.render('homepage', { reviews: reviewsData });
 });
+
+
+
+
+/*app.get("/homepage_test", async function (req, res) {
+  const review1 = await Review.getReviewDetails({ id: 5 });
+  const review2 = await Review.getReviewDetails({ id: 11 });
+  const review3 = await Review.getReviewDetails({ id: 10 });
+  let review_id = req.query.review_id;
+  let review1 = new Review (review_id);
+  let review2 = new Review (review_id);
+  let review3 = new Review (review_id);
+
+  await review1.getReviewId([1]);
+  await review2.getReviewId([3]);
+  await review3.getReviewId([2]);
+  
+  res.render("homepage_test", {review1, review2, review3});
+});*/
 
 app.get("/questionnaire", function (req, res) {
   req.session.touch()
@@ -235,12 +270,14 @@ app.post('/submit_profile', async function (req, res) {
 
   try {
     await user.addProfileDetails(params.first_name, params.last_name, params.dob, params.job, params.gender, params.religion, params.politics, params.bio, params.nationality, params.id);
-    res.send('form submitted');
+    console.log(params.location, params.age, params.noise, params['gender preference'], params['cleaning-style'],params.smoking, params.Alcohol, params.grocery,params['work-schedule'],params.pets, params['guest-policy'], params.religion_pref, params.politics_pref,params.country,params.id)
+    await user.addPreferences(params.location, params.age, params.noise, params['gender preference'], params['cleaning-style'],params.smoking, params.Alcohol, params.grocery,params['work-schedule'],params.pets, params['guest-policy'], params.religion_pref, params.politics_pref,params.country,params.id )
+    res.redirect("/profiles");
   }
   catch (err) {
     console.error(`Error while adding newuser `, err.message);
   }
-  res.send('form submitted');
+  res.redirect("/questionnaire");
 
 });
 

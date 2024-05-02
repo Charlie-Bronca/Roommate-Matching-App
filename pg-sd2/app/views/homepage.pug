@@ -1,4 +1,3 @@
-doctype html
 html(lang='en')
   head
     meta(charset='UTF-8')
@@ -19,15 +18,14 @@ html(lang='en')
       justify-content: space-between;
       align-items: center;
       width: auto;
-      height: 7vw;
-      padding-left: 5vw;
-      padding-right: 5vw;
+      height: 70px;
+      padding-left: 50px;
+      padding-right: 50px;
       border-bottom: solid 0.5px;
       }
       .Logo {
-      width: 18%;
-      height: auto;
-      margin-right: 68%;
+      width: 150px;
+      height: 45px;
       }
       .buttons {
       display: flex;
@@ -63,7 +61,7 @@ html(lang='en')
       height: auto;
       background-color: #F2E9E2;
       }
-      .lukecel {
+      .photocel {
       margin-top: 10%;
       margin-left: 10%;
       width: 20%;
@@ -115,18 +113,14 @@ html(lang='en')
       .triangle {
       position: relative;
       margin-top: 5%;
-      width: 95%;
-      height: 100%;
+      width: 100%;
+      height: auto;
       z-index: 0;
-      object-fit: cover;
       }
       .tricont {
+      height: auto;
       width: auto;
       position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-start;
-      height: 100%;
       }
       .text {
       font-family: Arial, Helvetica, sans-serif;
@@ -158,26 +152,60 @@ html(lang='en')
       }
       .reviews {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      justify-content: space-evenly ;
       flex-wrap: wrap;
+      padding: 5%;
       }
       .boxes{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      width: calc(33% - 6vw);
       margin: 3vw;
       border: solid;
-      border-width: 0.1vw;
+      border-width: 0.75px;
       border-radius: 30px;
       border-color: black;
-      width: 20%;
+      }
+      .reviewText{
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.5vw;
+      margin: 10%;
+      }
+      .blueBanner  {
+      background: #859EBC;
+      overflow: hidden;
+      border: solid;
+      border-width: 0.75px;
+      border-radius: 30px;
+      border-color: black;
+      }
+      .nameText {
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+      }
+      .photomask {
+      border-radius: 50%;
+      width: 6vw;
+      height: 6vw;
+      display: flex;
+      position: relative;
+      left: 130%;
+      overflow: hidden;
       }
       footer {
       color: #000000;
+      padding: 20px 0;
       }
       .footer-container {
       display: flex;
       justify-content: space-around;
-      width: 75%;
-      margin-left: 9vw;
+      width: 70%;
+      height: 110px;
+      margin: 1px auto;
       padding: 15px;
       }
       .footer-section {
@@ -185,30 +213,31 @@ html(lang='en')
       }
       .footer-section h3 {
       font-family: sans-serif;
-      font-size: 1.4vw;
+      font-size: 17px;
+      margin-bottom: 10px;
       }
       .footer-section ul {
       list-style-type: none;
       padding: 0;
       }
       .footer-section ul li {
-      margin-bottom: 1vw;
+      margin-bottom: 5px;
       font-family: sans-serif;
       font-weight: 200;
-      font-size: 1vw;
+      font-size: 13px;
       }
       .footer-section ul li a {
       text-decoration: none;
       color: inherit;
       }
       .footer-section ul li a:hover{
-      color: #FE6941;
+      color: rgb(199, 20, 20);
       }
       .footer-section img{
-      width: 100%;
-      height: auto;
-      margin-top: 45%;
-      margin-left: 15%;
+      width: 150px;
+      height: 45px;
+      margin-top: 30%;
+      margin-left: 100px;
       }
       @media screen and (max-width: 368px) {
       .footer-container {
@@ -224,35 +253,35 @@ html(lang='en')
       }
       }
       .copyright {
-      height: 8vw;
-      border-top: 0.1vw solid #000;
+      height: 80px;
+      border-top: 1px solid #000;
       }
       .copyright p {
-      margin-top: 2vw;
-      margin-left: 70vw;
+      margin-top: 30px;
+      margin-left: 70%;
       color: #999;
       font-family: sans-serif;
-      font-size: 1vw;
+      font-size: 13px;
       }
   body
     .NavBar
       img.Logo(src='/logo/FlatBuddies logo2.png', alt='Logo')
       |        
       .buttons
-        a.loginbutton(href='/login_test') Log In
+        a.loginbutton(href='login_test') Log In
     |  
     |    
     .tophalf
       .content
-        .lukecel
+        .photocel
           .picturemask
             img.picture(src='/images/00012.png', alt="Luke's profile picture")
           |                
           img.profile(src='/images/Luke-Example.png', alt="Luke's profile")
         |            
-        .lukecel
+        .photocel
           .picturemask
-            img.picture(src='/images/00004.png', alt="Luke's profile picture", width='auto', height='100%')
+            img.picture(src='/images/00004.png', alt="Celine's profile picture", width='auto', height='100%')
           |                
           img.profile(src='/images/Celine-Example.png', alt="Celine's profile")
         |            
@@ -272,12 +301,34 @@ html(lang='en')
     p.saying What users are saying...
     |    
     .reviews
-      img.boxes(src='/images/Blair.png', alt="Blair's review")
-      |        
-      img.boxes(src='/images/James.png', alt="James' review")
-      |        
-      img.boxes(src='/images/Blessing.png', alt="Blessing's review")
-    |    
+      each review in reviews
+        .boxes
+          .reviewText
+            p= review.review 
+              .photocel
+                .photomask
+                  - const pic_num = String(review.userId).padStart(5, '0');
+                  - console.log(review)
+                  img.picture(src="/images/"+pic_num+".png", alt="Profile picture", width='auto', height='100%')
+              .blueBanner
+                p.nameText= review.name
+
+        //.boxes
+          .photocel
+            .photomask
+              img.picture(src='static/images/00011.png', alt="James's profile picture", width='auto', height='100%')
+          .blueBanner
+            .nameText
+              p James
+
+        //.boxes
+          .photocel
+            .photomask
+              img.picture(src='static/images/00010.png', alt="Blessing's profile picture", width='auto', height='100%')
+          .blueBanner
+            .nameText
+              p Blessing
+
     footer
       .footer-container
         .footer-section
@@ -345,7 +396,7 @@ html(lang='en')
               a(href='#') Social Media Icons
         |          
         .footer-section
-          img(src='/logo/FlatBuddies logo2.png', alt='no logo')
+          img(src='images/FlatBuddies logo2.png', alt='no logo')
     |  
     .copyright
       p &copy; 2024 FlatBuddies. All rights reserved.
