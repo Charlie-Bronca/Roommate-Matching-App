@@ -220,20 +220,7 @@ app.post('/submit_review', async function (req, res) {
 
 });
 
-  //var user = new Profile(params.id);
-  //console.log("FORM KNOWS ID:", params.id)
-  //console.log(params)
-  //res.send('The user is', user);
-  /*
-  try {
-    await user.addProfileDetails(params.first_name, params.last_name, params.dob, params.job, params.gender, params.religion, params.politics, params.bio, params.nationality, params.id);
-    res.send('form submitted');
-  }
-  catch (err) {
-    console.error(`Error while adding newuser `, err.message);
-  }
-  */
-  //res.send('form submitted');
+ 
 
 
 
