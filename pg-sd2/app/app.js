@@ -161,104 +161,9 @@ app.get("/chat", async function (req, res) {
 });
 */
 
-//HANNAN Questionnaire
-
-// app.post("/submit_profile", async function (req, res) {
-//   try {
-//     // Validate the submitted data (optional but recommended)
-//     console.log("this is Body", req.body, "body end");
-//     const Data = req.body; // Destructuring for cleaner access
-//     if (!Data) {
-//       throw new Error("Missing required field: note");
-//     }
-
-//     // Create a new user instance with the submitted data
-//     const newUser = new User(Data); // Assuming 'id' is a unique identifier
-
-//     // Save the new user to the database using await
-//      const savedUser = await newUser.save();
-
-
-//     if (!savedUser) {
-//       throw new Error("Error saving user data");
-//     }
-//   } catch (err) {
-//     console.error("Error creating profile:", err.message);
-//     res.status(500).send("Internal server error"); // Informative error response to client
-//   }
-// });
-
-// HANNAN QUESTIONNAIRE PAGE
-
-// error-message This page was not restored from back/forward cache because a content script from the extension with ID nkbihfbeogaeaoehlefnkodbefgpgknn received a message while the page was cached. This behavior will change shortly which may break the extension. If you are the developer of the extension, see https://developer.chrome.com/blog/bfcache-extension-messaging-changes.
-
-// app.post("/submit_profile", async function (req, res) {
-//   try {
-//     // Validate the submitted data
-//     const { first_name, last_name, dob, gender, religion, politics, bio, country, job } = console.Console.log( req.body);
-//     if (!first_name || !last_name || !dob || !gender || !religion || !politics || !bio || !country || !job) {
-//       throw new Error("Missing required fields");
-//     }
-
-//     // Create a new user instance with the submitted data
-//     const newUser = new User({
-//       first_name,
-//       last_name,
-//       dob,
-//       gender,
-//       religion,
-//       politics,
-//       bio,
-//       country,
-//       job
-//     });
-
-//     // Save the new user to the database
-//     const savedUser = await newUser.save();
-
-//     if (!savedUser) {
-//       throw new Error("Error saving user data");
-//     }
-
-//     res.status(200).send("User profile saved successfully");
-//   } catch (err) {
-//     console.error("Error creating profile:", err.message);
-//     res.status(500).send("Internal server error");
-//   }
-// });
 
 
 
-// ??? code
-/*
-app.post("/submit_profile", async function (req, res) {
-  try {
-      console.log("Submitted Profile Data:", req.body); // Log the submitted profile data
-
-      // Validate the submitted data
-      const requiredFields = ['first_name', 'last_name', 'bio']; // Define required fields
-      for (const field of requiredFields) {
-          if (!req.body[field]) {
-              throw new Error(`Missing required field: ${field}`);
-          }
-      }
-
-      // Create a new user instance with the submitted data
-      const newUser = new User();
-
-      // Assign values to user instance properties
-      newUser.first_name = req.body.first_name;
-      newUser.last_name = req.body.last_name;
-      newUser.bio = req.body.bio;
-
-
-      res.status(200).send("User profile saved successfully");
-  } catch (err) {
-      console.error("Error creating profile:", err.message);
-      res.status(500).send("Internal server error");
-  }
-});
-*/
 
 
 app.post('/submit_profile', async function (req, res) {
@@ -315,78 +220,13 @@ app.post('/submit_review', async function (req, res) {
 
 });
 
-  //var user = new Profile(params.id);
-  //console.log("FORM KNOWS ID:", params.id)
-  //console.log(params)
-  //res.send('The user is', user);
-  /*
-  try {
-    await user.addProfileDetails(params.first_name, params.last_name, params.dob, params.job, params.gender, params.religion, params.politics, params.bio, params.nationality, params.id);
-    res.send('form submitted');
-  }
-  catch (err) {
-    console.error(`Error while adding newuser `, err.message);
-  }
-  */
-  //res.send('form submitted');
+ 
 
 
 
   // Hannan Reviews Form Setup
 
-/*
-  app.post("/submit_review", async function (req, res) {
-    try {
-        console.log("Review Submitted:", req.body); // Log the submitted review data
 
-        // Validate the submitted data
-        const requiredFields = ['review-text']; // Define required fields
-        for (const field of requiredFields) {
-            if (!req.body[field]) {
-                throw new Error(`Missing required field: ${field}`);
-            }
-        }
-
-    
-
-        res.status(200).send("Review submitted successfully");
-    } catch (err) {
-        console.error("Error submitting review:", err.message);
-        res.status(500).send("Internal server error");
-    }
-});
-*/
-
-  // Define the route for submitting reviews
-/*app.post("/submit_review", async function (req, res) {
-  try {
-    console.log("Received review data:", req.body);
-    
-    // Validate the submitted data
-    const requiredFields = ['user_id', 'rating', 'comment']; // Define required fields for a review
-    for (const field of requiredFields) {
-      if (!req.body[field]) {
-        throw new Error(`Missing required field: ${field}`);
-      }
-    }
-
-    // Create a new review instance with the submitted data
-    const newReview = new Review(req.body);
-
-    // Save the new review to the database
-    const savedReview = await newReview.save();
-    
-    if (!savedReview) {
-      throw new Error("Error saving review data");
-    }
-
-    res.status(200).send("Review submitted successfully");
-  } catch (err) {
-    console.error("Error submitting review:", err.message);
-    res.status(500).send("Internal server error");
-  }
-});*/
-  
 
 /*
 function calculateAge(dob) {
