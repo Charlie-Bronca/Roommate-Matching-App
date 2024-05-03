@@ -23,9 +23,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./services/db");
 
 //Get User Class
-const { User } = require("./models/user");
 const { User2 } = require("./models/user2");
 
+//Get Profile Class
 const { Profile } = require("./models/profile");
 
 //Get Chat Class
@@ -34,6 +34,7 @@ const { Chat } = require("./models/chat");
 //Get Review Class
 const { Review } = require("./models/review");
 
+//Define the session parameters
 var session = require('express-session');
 app.use(session({
   secret: 'secretkeysdfjsflyoifasd',
@@ -54,6 +55,7 @@ app.get("/", function (req, res) {
   res.redirect("/homepage");
 });
 
+//Defining a test route
 app.get("/flat_buddies_test", function (req, res) {
   var sql = "select * from users";
   db.query(sql).then((results) => {
@@ -63,10 +65,8 @@ app.get("/flat_buddies_test", function (req, res) {
   });
 });
 
-/*app.get("/homepage_test", function (req, res) {
-  res.render("homepage_test");
-});*/
 
+//Creating a route for homepage
 app.get('/homepage', async (req, res) => {
   const reviewIds = ['2', '4', '3'];
   const reviewsData = [];
@@ -109,6 +109,7 @@ app.get('/homepage', async (req, res) => {
   res.render("homepage_test", {review1, review2, review3});
 });*/
 
+//Creating route for questionnaire page
 app.get("/questionnaire", function (req, res) {
   req.session.touch()
   console.log("QUEST PAGE KNOWS",req.session.user_id)
@@ -116,67 +117,25 @@ app.get("/questionnaire", function (req, res) {
   res.render("questionnaire", {user_id:user_id});
 });
 
+//Creating route for an individual user page
 app.get("/user_profile/:user_id", async function (req, res) {
   req.session.touch()
   let user_id = req.params.user_id;
-  //let user = new User(user_id);
   let user = new Profile(user_id)
-  /*
-  await user.getFirstName();
-  await user.getLastName();
-  await user.getDOB();
-  await user.getGender();
-  await user.getPolitics();
-  await user.getReligion();
-  await user.getCountry();
-  await user.getBio();
-  */
   await user.getProfileDetails();
   await user.getPreferences();
-  //await user.getAge();
   console.log(user);
-  //res.send(user);
   res.render("user_profile_oop", { user: user });
 });
 
-//Data for chat, added for Sprint4
-/*
-app.get("/chat", async function (req, res) {
-  const chatData = {
-    chat_id: "chat1",
-    sender_id: "user1",
-    recipient_id: "user2",
-    timestamp: new Date(),
-    message: "Hello, Bob!",
-  };
 
-  const chat = new Chat(
-    chatData.chat_id,
-    chatData.sender_id,
-    chatData.recipient_id,
-    chatData.timestamp,
-    chatData.message
-  );
-
-  const senderName = await chat.getSenderName();
-  const recipientName = await chat.getRecipientName();
-
-  res.render("chat", { senderName, recipientName, chatData });
-});
-*/
-
-
-
-
-
-
+//This section submits the questionnaire form to the database
 app.post('/submit_profile', async function (req, res) {
   req.session.touch()
   params = req.body;
   var user = new Profile(params.id);
   console.log("FORM KNOWS ID:", params.id)
   console.log(params)
-  //res.send('The user is', user);
 
   try {
     const result = await user.addProfileDetails(params.first_name, params.last_name, params.dob, params.job, params.gender, params.religion, params.politics, params.bio, params.nationality, params.id);
@@ -192,6 +151,8 @@ app.post('/submit_profile', async function (req, res) {
 
 });
 
+
+//This section sends a chat buy updating the database
 app.post('/send_chat', async function (req, res) {
   req.session.touch()
   params = req.body;
@@ -208,6 +169,7 @@ app.post('/send_chat', async function (req, res) {
   }
 })
 
+//This section submits a review by adding it to the database
 app.post('/submit_review', async function (req, res) {
   req.session.touch()
   params = req.body;
@@ -224,30 +186,11 @@ app.post('/submit_review', async function (req, res) {
     res.send('error submitting');
   }
 
-
 });
 
  
 
-
-
-  // Hannan Reviews Form Setup
-
-
-
-/*
-function calculateAge(dob) {
-    const dobDate = new Date(dob);
-    const currentDate = new Date();
-    let age = currentDate.getFullYear() - dobDate.getFullYear();
-    const dobMonth = dobDate.getMonth();
-    const currentMonth = currentDate.getMonth();
-    if (currentMonth < dobMonth || (currentMonth === dobMonth && currentDate.getDate() < dobDate.getDate())) {
-        age--;
-    }
-    return age;
-}*/
-
+//Creating a route for the page that shows a grid of profiles
 app.get("/profiles", function (req, res) {
   req.session.touch()
   console.log("PROFILES PAGE KNOWS",req.session.user_id)
@@ -260,6 +203,8 @@ app.get("/profiles", function (req, res) {
   });
 });
 
+
+//Creates a route for the chat page for each profile you are chatting with
 app.get("/chat/:user_id", async function (req, res) {
   req.session.touch()
   console.log("CHAT PAGE KNOWS",req.session.user_id)
@@ -280,9 +225,6 @@ app.get("/chat/:user_id", async function (req, res) {
   
 });
 
-app.get("/login", function (req, res) {
-  res.render("login");
-});
 
 app.get('/register', function (req, res) {
   res.render('register');
@@ -297,31 +239,8 @@ app.get('/login_error', function (req, res) {
   res.render('login_error');
 });
 
-app.get("/user_profile/test/:user_id", async function (req, res) {
-  let user_id = req.params.user_id;
-  let user = new Profile(user_id);
-  /*
-  await user.getFirstName();
-  await user.getLastName();
-  await user.getDOB();
-  await user.getGender();
-  await user.getPolitics();
-  await user.getReligion();
-  await user.getCountry();
-  await user.getBio();
-  */
-  await user.getProfileDetails()
-  await user.getPreferences();
-  //await user.getAge();
-  console.log(user);
-  //res.send(user);
-  res.render("user_profile_post", { user: user });
-});
 
-app.get("/homepage_test", function (req, res) {
-  res.render("homepage_test");
-});
-
+//Creates a route for the page that lists all the chats you have with people
 app.get("/chat_list", async function(req, res) {
   req.session.touch()
   console.log("CHAT LIST PAGE KNOWS",req.session.user_id)
@@ -334,23 +253,13 @@ app.get("/chat_list", async function(req, res) {
   await user.getChatList();
   console.log(user.chats)
   const the_chats = user.chats
-  //the_chats.sort(function(a, b){return a.timestamp - b.timestamp});
-  //console.log(the_chats)
+
   const people = []
   const other_users = []
   const other_users_chats = []
-  //console.log(user.user_id)
+
   for(let i = 0; i < the_chats.length; i++){
-    //console.log(the_chats[i].sender_id, the_chats[i].recipient_id, user.user_id)
-    //console.log(the_chats[i].sender_id.valueOf(),(the_chats[i].sender_id.valueOf() in people))
-    /*
-    if (the_chats[i].sender_id.valueOf() != user.user_id.valueOf()){
-      console.log("This number is not the current user.")
-    }
-    if ((the_chats[i].sender_id.valueOf in people)==false){
-      console.log("This number is not in the list so far.", the_chats[i].sender_id.valueOf(), people.includes('2') )
-    }
-    */
+
     
     if ((the_chats[i].sender_id.valueOf() != user.user_id.valueOf())&&((people.includes(the_chats[i].sender_id.valueOf()))==false)){
       let other_user = new Profile(the_chats[i].sender_id.valueOf())
@@ -378,59 +287,10 @@ app.get("/chat_list", async function(req, res) {
   res.render("chat_list", { user: user , other_users: other_users, other_users_chats });
 });
 
-app.get("/chat_list/:user_id", async function(req, res) {
-  req.session.touch()
-  let user_id = req.params.user_id;
-  let user = new Profile(user_id);
-  await user.getProfileDetails();
-  await user.getPreferences();
-  await user.getChatList();
-  console.log(user.chats)
-  const the_chats = user.chats
-  the_chats.sort(function(a, b){return a.timestamp - b.timestamp});
-  //console.log(the_chats)
-  const people = []
-  const other_users = []
-  //console.log(user.user_id)
-  for(let i = 0; i < the_chats.length; i++){
-    //console.log(the_chats[i].sender_id, the_chats[i].recipient_id, user.user_id)
-    //console.log(the_chats[i].sender_id.valueOf(),(the_chats[i].sender_id.valueOf() in people))
-    /*
-    if (the_chats[i].sender_id.valueOf() != user.user_id.valueOf()){
-      console.log("This number is not the current user.")
-    }
-    if ((the_chats[i].sender_id.valueOf in people)==false){
-      console.log("This number is not in the list so far.", the_chats[i].sender_id.valueOf(), people.includes('2') )
-    }
-    */
-    
-    if ((the_chats[i].sender_id.valueOf() != user.user_id.valueOf())&&((people.includes(the_chats[i].sender_id.valueOf()))==false)){
-      let other_user = new Profile(the_chats[i].sender_id.valueOf())
-      await other_user.getProfileDetails();
-      other_users.push(other_user)
-      people.push(the_chats[i].sender_id.valueOf())
-      //console.log("ADDING: ",the_chats[i].sender_id.valueOf() )
-    }
-    if ((the_chats[i].recipient_id != user.user_id.valueOf())&&((people.includes(the_chats[i].recipient_id.valueOf()))==false)){
-      let other_user = new Profile(the_chats[i].recipient_id.valueOf())
-      await other_user.getProfileDetails();
-      other_users.push(other_user)
-      people.push(the_chats[i].recipient_id.valueOf())
-      //people.push(the_chats[i].recipient_id.valueOf())
-      //console.log("ADDING: ",the_chats[i].recipient_id.valueOf() )
-    }
-    
-    
-  }
-  console.log(people)
-  res.render("chat_list", { user: user , other_users: other_users, the_chats:the_chats });
-});
 
-/*app.get("/reviews", async (req, res) => {
-  const user_id = await fetchUserById(req.params.user_id);
-  res.render("reviews", { user_id });
-});*/
 
+
+//Create route for reviews page
 app.get("/reviews", function(req, res) {
     req.session.touch()
     console.log("REVIEW PAGE KNOWS",req.session.user_id)
@@ -438,30 +298,9 @@ app.get("/reviews", function(req, res) {
     res.render('reviews',{user_id:user_id} );
 });
 
-//The line below is just incase we connect this to an HTML form
-//app.use(bodyParser.urlencoded({ extended: true }));
-
-//The following will be connected when handling form submission
-/*app.post("/reviews", async(req, res) => {
-    const { review, date, user_id } = req.body;
-    await Review.newReview(review, date, user_id);
-    res.send('Thank you for your review!');
-});*/
-
-app.post('/add-bio', async function (req, res) {
-  params = req.body;
-  var user = new User(params.id);
-  try {
-    await user.addBio(params.bio);
-    res.send('form submitted');
-   }
-   catch (err) {
-       console.error(`Error while adding bio `, err.message);
-   }
-   res.send('form submitted');
-});
 
 
+//This section submits the setting password form from the register page
 app.post('/set-password', async function (req, res) {
   params = req.body;
   var user = new User2(params.email);
@@ -484,6 +323,8 @@ app.post('/set-password', async function (req, res) {
   }
 });
 
+
+//This section is completed with the login form 
 app.post('/authenticate', async function (req, res) {
   params = req.body;
   var user = new User2(params.email);
